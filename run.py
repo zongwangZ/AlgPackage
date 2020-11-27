@@ -18,5 +18,7 @@ if __name__ == '__main__':
     interference_matrix = generator.getInterferenceMatrix()
     print(interference_matrix)
     solver = ILPAlg(6,3,interference_matrix)
+    # solver = ILPAlg(4, 2, interference_matrix)
     solver.solve()
+    solver.getOutcome()
 

@@ -17,29 +17,45 @@ class ILPAlg:
         self.__node_num = node_num
         self.__overlay_node_num = overlay_node_num
         # self.__interference_matrix = interference_matrix
+        # self.__interference_matrix = np.array(
+        #     [[0, 1, 0, 0, 0, 1],
+        #      [1, 0, 0, 1, 0, 1],
+        #      [0, 0, 0, 1, 1, 0],
+        #      [0, 1, 1, 0, 0, 0],
+        #      [0, 0, 1, 0, 0, 1],
+        #      [1, 0, 0, 0, 1, 0]], dtype=int)
         self.__interference_matrix = np.array(
-            [[0, 1, 0, 0, 0, 1],
-             [1, 0, 0, 1, 0, 1],
-             [0, 0, 0, 1, 1, 0],
-             [0, 1, 1, 0, 0, 0],
-             [0, 0, 1, 0, 0, 1],
-             [1, 0, 0, 0, 1, 0]], dtype=int)
+            [[1, 1, 0, 0, 0, 1],
+             [1, 1, 0, 1, 0, 1],
+             [0, 0, 1, 1, 1, 0],
+             [0, 1, 1, 1, 0, 0],
+             [0, 0, 1, 0, 1, 1],
+             [1, 0, 0, 0, 1, 1]], dtype=int)
+        # self.__interference_matrix = np.array(
+        #     [[1, 0],
+        #      [0, 1],], dtype=int)
+
         self.__init_tunnels()
         self.__init_objective()
         self.__init_constrains()
 
     def getOutcome(self):
+        # for v in self.__prob.variables():
+        #     print(v.name, "=", v.varValue)
         for v in self.__prob.variables():
-            print(v.name, "=", v.varValue)
+            for key in self.__x_ij:
+                if self.__x_ij[key].name == v.name:
+                    print(v.name, "=", v.varValue)
 
     def solve(self):
+        self.__prob.writeLP("ILP_problem")
         self.__prob.solve()
 
     def __init_tunnels(self):
         self.__tunnel_num = self.__overlay_node_num * (self.__overlay_node_num - 1)
         self.__tunnel_list = []
-        for i in range(1, self.__tunnel_num + 1):
-            for j in range(1, self.__tunnel_num + 1):
+        for i in range(1, self.__overlay_node_num + 1):
+            for j in range(1, self.__overlay_node_num + 1):
                 if i != j:
                     self.__tunnel_list.append((i, j))
 
@@ -62,7 +78,7 @@ class ILPAlg:
         self.__init_constrain3()
         self.__init_constrain4()
         self.__init_constrain5()
-        pass
+        self.__init_constrain6()
 
     def __init_constrain1(self):
         """
@@ -87,25 +103,27 @@ class ILPAlg:
         for i in range(1, self.__node_num + 1):
             for j in range(1, self.__node_num + 1):
                 x_ij = self.__x_ij.get("{" + "{0},{1}".format(i, j) + "}")
-                x_ij_l = (1 - self.__x_ij_l.get("{" + "{},{}".format(i, j) + "}" + "^{}".format(1))) * (
-                            1 - self.__x_ij_l.get("{" + "{},{}".format(j, i) + "}" + "^{}".format(1)))
-                for k in range(2, self.__tunnel_num + 1):
-                    x_ij_l *= (1 - self.__x_ij_l.get("{" + "{},{}".format(i, j) + "}" + "^{}".format(k))) * (
-                                1 - self.__x_ij_l.get("{" + "{},{}".format(j, i) + "}" + "^{}".format(k)))
-                x_ij_l = 1 - x_ij_l
-                self.__prob += x_ij - x_ij_l == 0
+                sum_x_ij_l = 0
+                for k in range(1, self.__tunnel_num + 1):
+                    x_ij_l = self.__x_ij_l.get("{" + "{},{}".format(i, j) + "}" + "^{}".format(k))
+                    x_ji_l = self.__x_ij_l.get("{" + "{},{}".format(j, i) + "}" + "^{}".format(k))
+                    self.__prob += x_ij >= x_ij_l
+                    self.__prob += x_ij >= x_ji_l
+                    sum_x_ij_l = sum_x_ij_l + x_ij_l + x_ji_l
+                self.__prob += x_ij <= sum_x_ij_l
 
     def __init_constrain2(self):
         """
         overlay node只与一个underlay node相连
         :return:
         """
-        variables_list = []
         for i in range(1, self.__overlay_node_num + 1):
+            variables_list = []
             for j in range(1, self.__node_num + 1):
                 variables_list.append(self.__x_ij.get("{" + "{},{}".format(i, j) + "}"))
+            self.__prob += lpSum(variables_list) == 1
 
-        self.__prob += lpSum(variables_list) == 1
+
 
     def __init_constrain3(self):
         """
@@ -113,13 +131,13 @@ class ILPAlg:
         :return:
         """
         for l in range(1, self.__tunnel_num + 1):
-            for j in range(1, self.__overlay_node_num + 1):
+            for j in range(1, self.__node_num + 1):  # self.__node_num self.__overlay_node_num
                 tunnel = self.__tunnel_list[l - 1]
                 s_lj = 1 if tunnel[0] == j else 0
                 d_lj = 1 if tunnel[1] == j else 0
                 sum_x_ij_l = []
                 sum_x_ji_l = []
-                for i in range(1, self.__node_num):
+                for i in range(1, self.__node_num+1):
                     sum_x_ij_l.append(self.__x_ij_l.get("{" + "{},{}".format(i, j) + "}" + "^{}".format(l)))
                     sum_x_ji_l.append(self.__x_ij_l.get("{" + "{},{}".format(j, i) + "}" + "^{}".format(l)))
                 self.__prob += lpSum(sum_x_ij_l) + s_lj == lpSum(sum_x_ji_l) + d_lj
@@ -162,9 +180,34 @@ class ILPAlg:
         for index in range(length):
             k = r_indexs[index] + 1
             l = c_indexs[index] + 1
-            if k != l:
+            # if k!=l:
+            for i in range(1, self.__node_num + 1):
+                for j in range(1, self.__node_num + 1):
+                    x_ij_k = self.__x_ij_l.get("{" + "{},{}".format(i, j) + "}" + "^{}".format(k))
+                    x_ij_l = self.__x_ij_l.get("{" + "{},{}".format(i, j) + "}" + "^{}".format(l))
+                    self.__prob += x_ij_k + x_ij_l <= 1
+
+    def __init_constrain6(self):
+        """
+        interference constraints
+        :return:
+        """
+        r_indexs, c_indexs = np.where(self.__interference_matrix == 1)
+        assert isinstance(r_indexs, np.ndarray)
+        length = r_indexs.size
+        for index in range(length):
+            k = r_indexs[index] + 1
+            l = c_indexs[index] + 1
+            sum_and = []
+            if k>l:
                 for i in range(1, self.__node_num + 1):
                     for j in range(1, self.__node_num + 1):
                         x_ij_k = self.__x_ij_l.get("{" + "{},{}".format(i, j) + "}" + "^{}".format(k))
                         x_ij_l = self.__x_ij_l.get("{" + "{},{}".format(i, j) + "}" + "^{}".format(l))
-                        self.__prob += x_ij_k + x_ij_l <= 1
+                        x_and_ijkl = LpVariable("x_and_{}{}{}{}".format(i,j,k,l),cat=LpBinary)
+                        self.__prob += x_and_ijkl <= x_ij_k
+                        self.__prob += x_and_ijkl <= x_ij_l
+                        self.__prob += x_and_ijkl >= x_ij_k+x_ij_l-1
+                        sum_and .append(x_and_ijkl)
+
+                self.__prob += lpSum(sum_and) >= 1
