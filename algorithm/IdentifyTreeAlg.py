@@ -13,22 +13,28 @@ import numpy as np
 from matplotlib import pyplot as plt
 import zss
 from util.EditDistanceUtil import *
+
+
 class IdentifyTreeAlg:
-    def __init__(self,network,overlay_node_num,interference_matrix:np.ndarray):
+    """
+   Topoloy Discovery Using Path Interference中Algorithm2方法的实现
+    """
+    def __init__(self,network,overlay_node_set:list,interference_matrix:np.ndarray):
         self.__network = network
-        self.__overlay_node_num = overlay_node_num
+        self.__overlay_node_set = overlay_node_set
+        self.__overlay_node_num = len(overlay_node_set)
         self.__interference_matrix = interference_matrix
         self.__init_tunnels()
         self.G = self.__createNetwork()
-        self.__node_no = overlay_node_num+1
+        self.__node_no = self.__overlay_node_num+1
         self.inference()
 
     def __init_tunnels(self):
         self.__tunnel_list = []
-        for i in range(1, self.__overlay_node_num + 1):
-            for j in range(1, self.__overlay_node_num + 1):
-                if i != j:
-                    self.__tunnel_list.append([i, j])
+        for node1 in self.__overlay_node_set:
+            for node2 in self.__overlay_node_set:
+                if node1 != node2:
+                    self.__tunnel_list.append([node1, node2])
         self.__tunnel_num = self.__overlay_node_num*(self.__overlay_node_num-1)
 
     def __createNetwork(self):
@@ -36,9 +42,7 @@ class IdentifyTreeAlg:
         return G
 
     def inference(self):
-        O = []
-        for i in range(1,self.__overlay_node_num+1):
-            O.append(i)
+        O = self.__overlay_node_set.copy()
         # 对应步骤1
         for overlay_node in O:
             self.G.add_node(overlay_node)
@@ -134,6 +138,8 @@ class IdentifyTreeAlg:
         plt.show()
         nx.draw(self.G,with_labels=True)
         plt.show()
-        EditDistanceUtil().compute(self.__network.G,self.G,root=1)
+        root = self.__overlay_node_set[0]
+        R = self.__overlay_node_set[1:]
+        EditDistanceUtil().compute(self.__network.G,self.G,R,root=0)
 
 

@@ -13,7 +13,12 @@ from data_generator.InterferenceMatrixGenerator import InterferenceMatrixGenerat
 from algorithm.ILPAlg import ILPAlg
 import numpy as np
 from algorithm.IdentifyTreeAlg import *
+from algorithm.OCCAMAlg import *
 def doSim_ILP():
+    """
+    采用的是1为根节点，overlay node 自动生成为1到n
+    :return:
+    """
     # E = [(1, 4), (2, 5), (3, 6), (4, 5), (4, 6), (5, 6)]
     # E = [(1,8),(2,10),(3,12),(4,7),(5,9),(6,11),(7,8),(7,9),(8,10),(9,10),(9,11),(10,12),(11,12)]
     E = [(1, 8), (2, 8), (3, 9), (4, 9), (5, 10), (6, 10), (7, 10), (8, 9), (9, 10)]
@@ -33,19 +38,30 @@ def doSim_ILP():
     solver.getOutcome()
 
 def doSim_1():
-    # overlay_num = 7
-    # E = [(1, 8), (2, 8), (3, 9), (4, 9), (5, 10), (6, 10), (7, 10), (8, 9), (9, 10)]
-    overlay_num = 6
-    E = [(1,7),(2,8),(3,8),(4,9),(5,9),(6,9),(7,8),(7,9)]
-    network = Network(overlay_num, E)
+    """
+    使用IdentifyTree算法推断
+    :return:
+    """
+    overlay_node_set = [0,1,2,3,4,5,6]
+    E = [(0, 7), (1, 7), (2, 8), (3, 8), (4, 9), (5, 9), (6, 9), (7, 8), (8, 9)]
+    # E = [(0,6),(1,7),(2,7),(3,8),(4,8),(5,8),(6,7),(6,8)]
+    # overlay_node_set = [0,1,2,3,4,5]
+    network = Network(overlay_node_set, E)
     generator = InterferenceMatrixGenerator(network)
     interference_matrix = generator.getInterferenceMatrix()
     print(interference_matrix)
-    alg = IdentifyTreeAlg(network,overlay_num,interference_matrix)
+    alg = IdentifyTreeAlg(network, overlay_node_set , interference_matrix)
     alg.compute_ed()
 
-
+def doSim_OCCAM():
+    # overlay_node_set = [0, 1, 2, 3, 4, 5, 6]
+    # E = [(0, 7), (1, 7), (2, 8), (3, 8), (4, 9), (5, 9), (6, 9), (7, 8), (8, 9)]
+    overlay_node_set = [0,1,2,3,4,5]
+    E = [(0,6),(1,6),(2,6),(3,8),(4,8),(5,7),(6,7),(7,8)]
+    network = Network(overlay_node_set, E)
+    alg = OCCAMAlg(network,overlay_node_set)
+    alg.solve()
 
 if __name__ == '__main__':
-    doSim_1()
+    doSim_OCCAM()
 

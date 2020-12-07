@@ -22,12 +22,11 @@ class InterferenceMatrixGenerator:
         return self.__interference_matrix
 
     def __gen_matrix(self):
-        overlay_node_num = self.__topoloy.getOverlayNodeNum()
         tunnel_list = []
-        for i in range(1, overlay_node_num + 1):
-            for j in range(1, overlay_node_num + 1):
-                if i != j:
-                    tunnel_list.append((i, j))
+        for node1 in self.__topoloy.getOverlayNodeSet():
+            for node2 in self.__topoloy.getOverlayNodeSet():
+                if node1 != node2:
+                    tunnel_list.append([node1, node2])
         tunnel_num = len(tunnel_list)
         matrix = np.zeros(shape=(tunnel_num, tunnel_num), dtype=int)
         tunnel_path = []

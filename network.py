@@ -11,8 +11,8 @@
 import networkx as nx
 from matplotlib import pyplot as plt
 class Network:
-    def __init__(self, overlay_node_num, edge_set):
-        self.__overlay_node_num = overlay_node_num
+    def __init__(self, overlay_node_set, edge_set):
+        self.__overlay_node_set = overlay_node_set
         self.__edge_set = edge_set
         self.G = self.create_graph()
 
@@ -31,11 +31,19 @@ class Network:
         """
         return self.__edge_set
 
+    def getOverlayNodeSet(self):
+        """
+        获取边缘节点集合
+        :return:
+        """
+        return self.__overlay_node_set
+
     def getOverlayNodeNum(self):
         """
         返回边缘节点的数量
         :return:
         """
+        self.__overlay_node_num = len(self.__overlay_node_set)
         return self.__overlay_node_num
 
     def getAdjacentNodes(self,node):
