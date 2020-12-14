@@ -10,7 +10,8 @@
 '''
 from pulp import *
 import networkx as nx
-
+from util import tool
+from matplotlib import pyplot as plt
 
 class OCCAMAlg:
     def __init__(self,network, host_node_set, alpha=0.5):
@@ -26,12 +27,12 @@ class OCCAMAlg:
 
     def solve(self):
         self.__prob.writeLP("ILP_problem")
-        self.__prob.solve()
+        self.__prob.solve(CPLEX_CMD(options = ['epgap = 0.25']))
         print(LpStatus[self.__prob.status])
 
     def __init_constraints(self):
         self.__init_constraint1()  # Path sharing
-        self.__init_constraint2() # Distance metrics
+        self.__init_constraint2()  # Distance metrics
         self.__init_constraint3()  # Source tree property
         self.__init_constraint4()  # Source-oblivous path
         self.__init_constraint5()  # Populating the d_{i,j}^T variables
@@ -50,7 +51,7 @@ class OCCAMAlg:
             for k in self.__V:  # 不是很确定
                 for j in list(set(self.__V).difference({S})):
                     s_S_jk = self.__s_S_ij.get("{" + "{},{}".format(j, k) + "}"+"^"+"{}".format(S))
-                    self.__prob += s_S_jk <= [self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S)) for i in self.__V]
+                    self.__prob += s_S_jk <= lpSum([self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S)) for i in self.__V])
         # print(self.__prob.constraints)
 
 
@@ -59,6 +60,8 @@ class OCCAMAlg:
         """
         Path sharing，公共路径长度 约束
         PSM(S,T_1,T_2)<PSM(S,T_2,T_3)
+        公式含义：
+        公共路径(S,T_1,T_2)上的节点多于(S,T_2,T_3)
         其中涉及二元变量相乘，即为and操作，可以转换为一组线性的约束
         xy -> z<=x, z<=y, z>=x+y-1
         :return:
@@ -93,16 +96,33 @@ class OCCAMAlg:
     def __is_PSM(self,S,T_1,T_2,T_3):
         """
         判断 PSM(S,T_1,T_2)<PSM(S,T_2,T_3) 是否成立
+        <i>这里没有限制T不能等于S<i>
+        <i>现在增加限制<i>
         :return:
         """
+        # 先排除节点相等的情况
+        if S == T_1 or S == T_2 or S == T_3 or T_1 == T_2 or T_1 == T_3 or T_2 == T_3:
+            return False
         flag = True
-
+        # from ground truth
+        assert isinstance(self.__network.G,nx.Graph)
+        path1 = nx.shortest_path(self.__network.G,S,T_1)
+        path2 = nx.shortest_path(self.__network.G,S,T_2)
+        path3 = nx.shortest_path(self.__network.G, S, T_3)
+        path12 = set(path1).intersection(set(path2))
+        path23 = set(path2).intersection(set(path3))
+        if len(path12) < len(path23):
+            flag = True
+        else:
+            flag = False
         return flag
 
     def __init_constraint2(self):
         """
         Distance metrics 路径长度 约束
         DM(S,T_1)<DM(S,T_2)
+        <i>这里没有限制T不能等于S<i>
+        <i>增加限制<i>
         :return:
         """
         for S in self.__H:
@@ -122,7 +142,15 @@ class OCCAMAlg:
         :param T_2:
         :return:
         """
+        if S == T_1 or S == T_2 or T_1 == T_2:
+            return False
         flag = True
+        path1 = nx.shortest_path(self.__network.G,S,T_1)
+        path2 = nx.shortest_path(self.__network.G, S, T_2)
+        if len(path1) < len(path2):
+            flag = True
+        else:
+            flag = False
         return flag
 
     def __init_constraint3(self):
@@ -133,7 +161,7 @@ class OCCAMAlg:
         for S in self.__H:
             for j in self.__V:
                 self.__prob += \
-                    lpSum([self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S))] for i in self.__V) <= 1
+                    lpSum([self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S)) for i in self.__V]) <= 1
         # print(self.__prob.constraints)
 
     def __init_constraint4(self):
@@ -144,8 +172,8 @@ class OCCAMAlg:
         for T in self.__H:
             for i in self.__V:
                 self.__prob += \
-                    lpSum([self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}" + "^" + "{}".format(T))] for j in
-                          self.__V) <= 1
+                    lpSum([self.__d_T_ij.get("{" + "{},{}".format(i, j) + "}" + "^" + "{}".format(T)) for j in
+                          self.__V]) <= 1
         # print(self.__prob.constraints)
 
     def __init_constraint5(self):
@@ -153,8 +181,8 @@ class OCCAMAlg:
         Populating the d_{i,j}^T variables
         :return:
         """
-        self.__M = 128
-        for T in self.__H: # 这里的T 是否正确
+        self.__M = 10
+        for T in self.__H:  # 这里的T 是否正确
             for i in self.__V:
                 for j in self.__V:
                     d_T_ij = self.__d_T_ij.get("{" + "{},{}".format(i, j) + "}" + "^" + "{}".format(T))
@@ -181,7 +209,8 @@ class OCCAMAlg:
         m_S^S = 0
         :return:
         """
-        for S in self.__V:
+        uper_bound = 10
+        for S in self.__H:
             self.__prob += self.__m_S_j.get("{0}^{1}".format(S,S)) == 0
         for j in self.__V:
             for S in self.__H:
@@ -190,10 +219,10 @@ class OCCAMAlg:
                     m_i = LpVariable("m_{},{},{}".format(S,i,j),cat=LpInteger)
                     s_S_ij = self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S))
                     m_S_i = self.__m_S_j.get("{0}^{1}".format(S,i))
-                    self.__prob += m_i <= (128+1) * s_S_ij  # z<= Ib
+                    self.__prob += m_i <= (uper_bound+1) * s_S_ij  # z<= Ib
                     self.__prob += m_i <= m_S_i+1  # z<=i
-                    self.__prob += m_i >= m_S_i+1-(1-s_S_ij)*(128+1)  # z >= i-(1-b)*I
-                    self.__prob += m_i >= m_S_i  # z>=i
+                    self.__prob += m_i >= m_S_i+1-(1-s_S_ij)*(uper_bound+1)  # z >= i-(1-b)*I
+                    self.__prob += m_i >= 0  # z>=0
                     M_sum.append(m_i)
                 m_S_j = self.__m_S_j.get("{0}^{1}".format(S,j))
                 self.__prob += m_S_j == lpSum(M_sum)
@@ -271,11 +300,12 @@ class OCCAMAlg:
         m_T^S
         :return:
         """
+        upBound = 10
         variables_list = []
         for S in self.__H:
             for j in self.__V:
                 variables_list.append("{0}^{1}".format(S,j))
-        variables = LpVariable.dict("m",variables_list,lowBound=0, upBound=128, cat=LpInteger) # 自行定义了上届
+        variables = LpVariable.dict("m",variables_list,lowBound=0, upBound=upBound, cat=LpInteger) # 自行定义了上届
         # print(variables)
         return variables
 
@@ -373,7 +403,31 @@ class OCCAMAlg:
                             i_k_1 = i_k_2
                             break
 
+    def plot_inferred_graph(self):
+        """
+        将推断的拓扑绘制
+        :return:
+        """
+        nx.draw(self.G, with_lables=True)
+        plt.show()
 
     def __createNetwork(self):
         G = nx.Graph()
         return G
+
+    def true_objective_value(self):
+        """
+        输出真实目标函数的值
+        最短路径长度+最少数量边
+        :return:
+        """
+        assert isinstance(self.__network.G,nx.Graph)
+        sum_component1 = 0
+        for S in self.__H:
+            for T in self.__H:
+                path = nx.shortest_path(self.__network.G,S,T)
+                sum_component1 += len(path)-1
+        sum_component2 = len(self.__network.G.edges)*2
+        value = self.__alpha * sum_component1 + (1-self.__alpha) * sum_component2
+        print("true objective value:",value)
+        return value

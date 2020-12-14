@@ -13,7 +13,7 @@ from data_generator.InterferenceMatrixGenerator import InterferenceMatrixGenerat
 from algorithm.ILPAlg import ILPAlg
 import numpy as np
 from algorithm.IdentifyTreeAlg import *
-from algorithm.OCCAMAlg import *
+from algorithm.OBAlg import *
 def doSim_ILP():
     """
     采用的是1为根节点，overlay node 自动生成为1到n
@@ -56,11 +56,17 @@ def doSim_1():
 def doSim_OCCAM():
     # overlay_node_set = [0, 1, 2, 3, 4, 5, 6]
     # E = [(0, 7), (1, 7), (2, 8), (3, 8), (4, 9), (5, 9), (6, 9), (7, 8), (8, 9)]
-    overlay_node_set = [0,1,2,3,4,5]
-    E = [(0,6),(1,6),(2,6),(3,8),(4,8),(5,7),(6,7),(7,8)]
+    # overlay_node_set = [0,1,2,3,4,5]
+    # E = [(0,6),(1,6),(2,6),(3,8),(4,8),(5,7),(6,7),(7,8)]
+    overlay_node_set = [0,1,2,3]
+    E = [(0,4),(1,4),(2,4),(3,4)]
+    # E = [(0,4),(1,4),(2,5),(3,5),(4,5)]
     network = Network(overlay_node_set, E)
-    alg = OCCAMAlg(network,overlay_node_set)
+    alg = OCCAMAlg(network, overlay_node_set)
     alg.solve()
+    alg.true_objective_value()
+    # alg.inference()
+    # alg.plot_inferred_graph()
 
 if __name__ == '__main__':
     doSim_OCCAM()
