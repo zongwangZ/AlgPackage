@@ -63,8 +63,10 @@ def doSim_OCCAM():
     # E = [(0,4),(1,4),(2,5),(3,5),(4,5)]
     network = Network(overlay_node_set, E)
     alg = OCCAMAlg(network, overlay_node_set)
+    alg.getOutcome()
     alg.solve()
     alg.true_objective_value()
+    alg.getOutcome()
     # alg.inference()
     # alg.plot_inferred_graph()
 

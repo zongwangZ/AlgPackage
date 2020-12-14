@@ -24,10 +24,21 @@ class OCCAMAlg:
         self.__init_constraints()
         self.G = self.__createNetwork()
 
+    def getOutcome(self):
+        for key in self.__w_ij:
+            v = self.__w_ij.get(key)
+            if v.value() == 1:
+                print(v.name,v.value())
+        for key in self.__m_S_j:
+            v = self.__m_S_j.get(key)
+            if v.value() == 1:
+                print(v.name,v.value())
 
     def solve(self):
         self.__prob.writeLP("ILP_problem")
-        self.__prob.solve(CPLEX_CMD(options = ['epgap = 0.25']))
+        # solver = CPLEX_CMD(keepFiles=True,options=['epgap = 0.25'])
+        solver = PULP_CBC_CMD(gapRel=0.15,timeLimit=1200)
+        self.__prob.solve(solver)
         print(LpStatus[self.__prob.status])
 
     def __init_constraints(self):
@@ -283,7 +294,8 @@ class OCCAMAlg:
         :return:
         """
         self.__host_num = len(self.__H)
-        self.__node_num = 2*self.__host_num
+        # self.__node_num = 2*self.__host_num
+        self.__node_num = 5
         self.__V = []
         for node in range(0,self.__node_num):
             self.__V.append(node)
