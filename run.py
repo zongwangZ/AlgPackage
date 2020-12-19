@@ -14,6 +14,9 @@ from algorithm.ILPAlg import ILPAlg
 import numpy as np
 from algorithm.IdentifyTreeAlg import *
 from algorithm.OBAlg import *
+import logging
+import logging.config
+import time
 def doSim_ILP():
     """
     采用的是1为根节点，overlay node 自动生成为1到n
@@ -53,23 +56,49 @@ def doSim_1():
     alg = IdentifyTreeAlg(network, overlay_node_set , interference_matrix)
     alg.compute_ed()
 
+def get3(f=0):
+    overlay_node_set = None
+    E = None
+    if f == 0:
+        overlay_node_set = [0, 1, 2, 3]
+        E = [(0, 4), (1, 4), (2, 4), (3, 4)]
+    if f == 1:
+        overlay_node_set = [0, 1, 2, 3]
+        E = [(0, 4), (1, 4), (2, 5), (3, 5), (4, 5)]
+    return overlay_node_set,E
+
+def get4(f=0):
+    overlay_node_set = None
+    E = None
+    if f==0:
+        overlay_node_set = [0, 1, 2, 3, 4]
+        E = [(0, 5), (1, 5), (2, 6), (3, 6), (4, 6), (5, 6)]
+    if f == 1:
+        overlay_node_set = [0,1,2,3,4]
+        E = [(0,5),(1,6),(2,6),(3,7),(4,7),(5,6),(5,7)]
+    return overlay_node_set,E
+
+def get5():
+    overlay_node_set = [0, 1, 2, 3, 4, 5]
+    E = [(0, 6), (1, 7), (2, 7), (3, 8), (4, 8), (5, 8), (6, 7), (6, 8)]
+    return overlay_node_set, E
+
+
 def doSim_OCCAM():
+    logging.config.fileConfig('util/logging.conf')
+    logger = logging.getLogger('applog')
+    logger.info("-----------------------------------"+"start at "+time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())+"-------------------------------")
     # overlay_node_set = [0, 1, 2, 3, 4, 5, 6]
     # E = [(0, 7), (1, 7), (2, 8), (3, 8), (4, 9), (5, 9), (6, 9), (7, 8), (8, 9)]
-    # overlay_node_set = [0,1,2,3,4,5]
-    # E = [(0,6),(1,6),(2,6),(3,8),(4,8),(5,7),(6,7),(7,8)]
-    overlay_node_set = [0,1,2,3]
-    E = [(0,4),(1,4),(2,4),(3,4)]
-    # E = [(0,4),(1,4),(2,5),(3,5),(4,5)]
+    overlay_node_set, E = get4(1)
     network = Network(overlay_node_set, E)
     alg = OCCAMAlg(network, overlay_node_set)
-    alg.getOutcome()
-    alg.solve()
     alg.true_objective_value()
+    alg.solve()
     alg.getOutcome()
-    # alg.inference()
+    alg.inference()
     # alg.plot_inferred_graph()
 
 if __name__ == '__main__':
     doSim_OCCAM()
-
+    # doSim_1()

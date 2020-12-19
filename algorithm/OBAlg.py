@@ -12,9 +12,11 @@ from pulp import *
 import networkx as nx
 from util import tool
 from matplotlib import pyplot as plt
+import logging.config
 
 class OCCAMAlg:
     def __init__(self,network, host_node_set, alpha=0.5):
+        self.__init_logger()
         self.__network = network
         self.__alpha = alpha
         self.__H = host_node_set
@@ -23,23 +25,31 @@ class OCCAMAlg:
         self.__init_objective()
         self.__init_constraints()
         self.G = self.__createNetwork()
+        # self.exportModel()
+
 
     def getOutcome(self):
         for key in self.__w_ij:
             v = self.__w_ij.get(key)
             if v.value() == 1:
-                print(v.name,v.value())
-        for key in self.__m_S_j:
-            v = self.__m_S_j.get(key)
-            if v.value() == 1:
-                print(v.name,v.value())
+                self.__logger.info("name:"+v.name+"   value:"+str(v.value()))
+        m_S_T = []
+        for S in self.__H:
+            for T in self.__H:
+                m_S_T.append(self.__m_S_j.get("{0}^{1}".format(S, T)))
+        for v in m_S_T:
+            if v.value() != 0:
+                self.__logger.info("name:"+v.name+"   value:"+str(v.value()))
+
 
     def solve(self):
-        self.__prob.writeLP("ILP_problem")
+        # self.__prob.writeLP("ILP_problem")
         # solver = CPLEX_CMD(keepFiles=True,options=['epgap = 0.25'])
-        solver = PULP_CBC_CMD(gapRel=0.15,timeLimit=1200)
+        # solver = PULP_CBC_CMD(gapRel=0.15,timeLimit=1200)
+        # solver = PULP_CBC_CMD(gapRel=0.15)
+        solver = PULP_CBC_CMD()
         self.__prob.solve(solver)
-        print(LpStatus[self.__prob.status])
+        self.__logger.info(LpStatus[self.__prob.status])
 
     def __init_constraints(self):
         self.__init_constraint1()  # Path sharing
@@ -51,21 +61,7 @@ class OCCAMAlg:
         self.__init_constraint7()  # Tracing a host-to-host path
         self.__init_constraint8_11()  # Boundary  conditions
         self.__init_constraint12()  # Boundary  conditions
-
-    def __init_constraint12(self):
-        """
-        Boundary  conditions
-        对应文章中的14
-        :return:
-        """
-        for S in self.__H:  # 不是很确定
-            for k in self.__V:  # 不是很确定
-                for j in list(set(self.__V).difference({S})):
-                    s_S_jk = self.__s_S_ij.get("{" + "{},{}".format(j, k) + "}"+"^"+"{}".format(S))
-                    self.__prob += s_S_jk <= lpSum([self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S)) for i in self.__V])
-        # print(self.__prob.constraints)
-
-
+        self.__init_constraint13()  # extra constraint
 
     def __init_constraint1(self):
         """
@@ -77,11 +73,13 @@ class OCCAMAlg:
         xy -> z<=x, z<=y, z>=x+y-1
         :return:
         """
+        self.__logger.debug("constraint1 init")
         for S in self.__H:
             for T_1 in self.__H:
                 for T_2 in self.__H:
                     for T_3 in self.__H:
                         if self.__is_PSM(S,T_1,T_2,T_3):
+                            self.__logger.debug("PSM:"+str((S,T_1,T_2,T_3)))
                             LHS = []
                             for i in self.__V:
                                 v_1 = self.__v_i_ST.get("{}".format(i)+"^"+"{" + "{},{}".format(S, T_1) + "}")
@@ -136,10 +134,12 @@ class OCCAMAlg:
         <i>增加限制<i>
         :return:
         """
+        self.__logger.debug("constraint2 init")
         for S in self.__H:
             for T_1 in self.__H:
                 for T_2 in self.__H:
                     if self.__is_DM(S, T_1, T_2):
+                        self.__logger.debug("DM:"+str((S, T_1, T_2)))
                         m1 = self.__m_S_j.get("{0}^{1}".format(S, T_1))
                         m2 = self.__m_S_j.get("{0}^{1}".format(S, T_2))
                         self.__prob += m1+1 <= m2
@@ -169,6 +169,7 @@ class OCCAMAlg:
         Source tree property
         :return:
         """
+        self.__logger.debug("constraint3 init")
         for S in self.__H:
             for j in self.__V:
                 self.__prob += \
@@ -180,6 +181,7 @@ class OCCAMAlg:
         Source-oblivous path
         :return:
         """
+        self.__logger.debug("constraint4 init")
         for T in self.__H:
             for i in self.__V:
                 self.__prob += \
@@ -192,6 +194,7 @@ class OCCAMAlg:
         Populating the d_{i,j}^T variables
         :return:
         """
+        self.__logger.debug("constraint5 init")
         self.__M = 10
         for T in self.__H:  # 这里的T 是否正确
             for i in self.__V:
@@ -220,6 +223,7 @@ class OCCAMAlg:
         m_S^S = 0
         :return:
         """
+        self.__logger.debug("constraint6 init")
         uper_bound = 10
         for S in self.__H:
             self.__prob += self.__m_S_j.get("{0}^{1}".format(S,S)) == 0
@@ -244,6 +248,7 @@ class OCCAMAlg:
         Tracing a host-to-host path
         :return:
         """
+        self.__logger.debug("constraint7 init")
         for S in self.__H:
             for T in self.__H:
                 for i in list(set(self.__V).difference(set(self.__H))):
@@ -266,6 +271,7 @@ class OCCAMAlg:
         对应论文中 10-13
         :return:
         """
+        self.__logger.debug("constraint8-11 init")
         for S in self.__H:
             # constraint10
             self.__prob += lpSum([self.__s_S_ij.get("{" + "{},{}".format(S, j) + "}"+"^"+"{}".format(S)) for j in self.__V]) == 1
@@ -288,14 +294,67 @@ class OCCAMAlg:
 
         # print(self.__prob.constraints)
 
+    def __init_constraint12(self):
+        """
+        Boundary  conditions
+        对应文章中的14
+        :return:
+        """
+        self.__logger.debug("constraint12 init")
+        for S in self.__H:  # 不是很确定
+            for k in self.__V:  # 不是很确定
+                for j in list(set(self.__V).difference({S})):
+                    s_S_jk = self.__s_S_ij.get("{" + "{},{}".format(j, k) + "}"+"^"+"{}".format(S))
+                    self.__prob += s_S_jk <= lpSum([self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S)) for i in self.__V])
+        # print(self.__prob.constraints)
+
+    def __init_constraint13(self):
+        """
+        补充对w_{i,j}的约束
+        :return:
+        """
+        self.__logger.debug("constraint13 init")
+        for i in self.__V:
+            for j in self.__V:
+                w_ij = self.__w_ij.get("{" + "{},{}".format(i, j) + "}")
+                # OR_S s_{i,j}^S
+                S_ij = LpVariable("S_{},{}".format(i,j),cat=LpBinary)
+                S_sum = []
+                for S in self.__H:
+                    s_S_ij = self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S))
+                    S_sum.append(s_S_ij)
+                    self.__prob += S_ij >= s_S_ij
+                self.__prob += S_ij <= lpSum(S_sum)
+                self.__prob += w_ij == S_ij
+
+                # OR_T d_{i,j}^S
+                D_ij = LpVariable("D_{},{}".format(i,j),cat=LpBinary)
+                D_sum = []
+                for T in self.__H:
+                    m_T_ij = self.__d_T_ij.get("{" + "{},{}".format(i, j) + "}" + "^" + "{}".format(T))
+                    D_sum.append(m_T_ij)
+                    self.__prob += D_ij >= m_T_ij
+                self.__prob += D_ij <= lpSum(D_sum)
+                self.__prob += w_ij == D_ij
+
+                for S in self.__H:
+                    for T in self.__H:
+                        v_i_ST = self.__v_i_ST.get()
+                        v_j_ST = self.__v_i_ST.get()
+                        m_S_i = self.__m_S_j.get()
+                        m_S_j = self.__m_S_j.get()
+
+
+        # print(self.__prob.constraints)
+
     def __init_V(self):
         """
         初始化V，默认为端节点数量的两倍，且从0到N
         :return:
         """
         self.__host_num = len(self.__H)
-        # self.__node_num = 2*self.__host_num
-        self.__node_num = 5
+        self.__node_num = 2*(self.__host_num-1)
+        # self.__node_num = 10
         self.__V = []
         for node in range(0,self.__node_num):
             self.__V.append(node)
@@ -397,23 +456,26 @@ class OCCAMAlg:
         未检验
         :return:
         """
+        print("do_inference")
         pi = {}
         for S in self.__H:
             for T in self.__H:
-                key = "{},{}".format(S, T)
-                if key not in pi:
-                    pi[key] = []
-                i_0 = T
-                pi[key].append(i_0)
-                i_k_1 = i_0
-                i_k_2 = i_0
-                while i_k_2 != S:
-                    for i_k_2 in self.__V:
-                        if self.__s_S_ij.get("{" + "{},{}".format(i_k_2, i_k_1) + "}"+"^"+"{}".format(S)).value() == 1:
-                            pi[key].append(i_k_2)
-                            self.G.add_edge(i_k_1,i_k_2)
-                            i_k_1 = i_k_2
-                            break
+                if S != T:
+                    key = "{},{}".format(S, T)
+                    if key not in pi:
+                        pi[key] = []
+                    i_0 = T
+                    pi[key].append(i_0)
+                    i_k_1 = i_0
+                    i_k_2 = i_0
+                    while i_k_2 != S:
+                        for i_k_2 in self.__V:
+                            if self.__s_S_ij.get("{" + "{},{}".format(i_k_2, i_k_1) + "}"+"^"+"{}".format(S)).value() == 1:
+                                pi[key].append(i_k_2)
+                                self.G.add_edge(i_k_1,i_k_2)
+                                i_k_1 = i_k_2
+                                break
+        self.__logger.info(pi)
 
     def plot_inferred_graph(self):
         """
@@ -441,5 +503,23 @@ class OCCAMAlg:
                 sum_component1 += len(path)-1
         sum_component2 = len(self.__network.G.edges)*2
         value = self.__alpha * sum_component1 + (1-self.__alpha) * sum_component2
-        print("true objective value:",value)
+        self.__logger.info("true objective value:"+str(value))
         return value
+
+    def __init_logger(self):
+        """
+        初始化logger
+        :return:
+        """
+        # self.logger = Logger(logger_name=self.__class__.__name__, log_name=self.__class__.__name__)
+        # self.logger.info("初始化"+self.__class__.__name__)
+        logging.config.fileConfig('util/logging.conf')
+        self.__logger = logging.getLogger('applog')
+
+    def exportModel(self):
+        """
+        将模型导出为dict
+        :return:
+        """
+        model_data = self.__prob.to_dict()
+        self.__logger.info(str(model_data))

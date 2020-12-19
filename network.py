@@ -10,11 +10,15 @@
 '''
 import networkx as nx
 from matplotlib import pyplot as plt
+import logging
+import logging.config
 class Network:
     def __init__(self, overlay_node_set, edge_set):
+        self.__init_logger()
         self.__overlay_node_set = overlay_node_set
         self.__edge_set = edge_set
         self.G = self.create_graph()
+        self.__logger.info("edge_set:"+str(edge_set)+"  "+"overlay_node_set:"+str(overlay_node_set))
 
     def create_graph(self):
         G = nx.Graph()
@@ -86,3 +90,13 @@ class Network:
                 flag = 1
                 break
         return flag
+
+    def __init_logger(self):
+        """
+        初始化logger
+        :return:
+        """
+        # self.logger = Logger(logger_name=self.__class__.__name__, log_name=self.__class__.__name__)
+        # self.logger.info("初始化"+self.__class__.__name__)
+        logging.config.fileConfig('util/logging.conf')
+        self.__logger = logging.getLogger('applog')

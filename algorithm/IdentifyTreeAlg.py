@@ -13,13 +13,14 @@ import numpy as np
 from matplotlib import pyplot as plt
 import zss
 from util.EditDistanceUtil import *
-
-
+from util.Logger import Logger
+import logging.config
 class IdentifyTreeAlg:
     """
    Topoloy Discovery Using Path Interference中Algorithm2方法的实现
     """
     def __init__(self,network,overlay_node_set:list,interference_matrix:np.ndarray):
+        self.__init_logger()
         self.__network = network
         self.__overlay_node_set = overlay_node_set
         self.__overlay_node_num = len(overlay_node_set)
@@ -28,6 +29,7 @@ class IdentifyTreeAlg:
         self.G = self.__createNetwork()
         self.__node_no = self.__overlay_node_num+1
         self.inference()
+
 
     def __init_tunnels(self):
         self.__tunnel_list = []
@@ -142,4 +144,12 @@ class IdentifyTreeAlg:
         R = self.__overlay_node_set[1:]
         EditDistanceUtil().compute(self.__network.G,self.G,R,root=0)
 
-
+    def __init_logger(self):
+        """
+        初始化logger
+        :return:
+        """
+        # self.logger = Logger(logger_name=self.__class__.__name__, log_name=self.__class__.__name__)
+        # self.logger.info("初始化"+self.__class__.__name__)
+        logging.config.fileConfig('util/logging.conf')
+        self.__logger = logging.getLogger('applog')
