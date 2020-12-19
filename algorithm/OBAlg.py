@@ -41,13 +41,15 @@ class OCCAMAlg:
             if v.value() != 0:
                 self.__logger.info("name:"+v.name+"   value:"+str(v.value()))
 
+        for v in self.__prob.variables():
+            self.__logger.debug("name:"+v.name+"   value:"+str(v.value()))
 
     def solve(self):
         # self.__prob.writeLP("ILP_problem")
         # solver = CPLEX_CMD(keepFiles=True,options=['epgap = 0.25'])
         # solver = PULP_CBC_CMD(gapRel=0.15,timeLimit=1200)
         # solver = PULP_CBC_CMD(gapRel=0.15)
-        solver = PULP_CBC_CMD()
+        solver = PULP_CBC_CMD(timeLimit=7200)
         self.__prob.solve(solver)
         self.__logger.info(LpStatus[self.__prob.status])
 
@@ -195,7 +197,7 @@ class OCCAMAlg:
         :return:
         """
         self.__logger.debug("constraint5 init")
-        self.__M = 10
+        self.__M = 100
         for T in self.__H:  # 这里的T 是否正确
             for i in self.__V:
                 for j in self.__V:
@@ -230,17 +232,19 @@ class OCCAMAlg:
         for j in self.__V:
             for S in self.__H:
                 M_sum = []
+                S_sum = []
                 for i in self.__V:
                     m_i = LpVariable("m_{},{},{}".format(S,i,j),cat=LpInteger)
                     s_S_ij = self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S))
                     m_S_i = self.__m_S_j.get("{0}^{1}".format(S,i))
-                    self.__prob += m_i <= (uper_bound+1) * s_S_ij  # z<= Ib
-                    self.__prob += m_i <= m_S_i+1  # z<=i
-                    self.__prob += m_i >= m_S_i+1-(1-s_S_ij)*(uper_bound+1)  # z >= i-(1-b)*I
+                    self.__prob += m_i <= uper_bound * s_S_ij  # z<= Ib
+                    self.__prob += m_i <= m_S_i  # z<=i
+                    self.__prob += m_i >= m_S_i-(1-s_S_ij)*uper_bound  # z >= i-(1-b)*I
                     self.__prob += m_i >= 0  # z>=0
                     M_sum.append(m_i)
+                    S_sum.append(s_S_ij)
                 m_S_j = self.__m_S_j.get("{0}^{1}".format(S,j))
-                self.__prob += m_S_j == lpSum(M_sum)
+                self.__prob += m_S_j == lpSum(M_sum)+lpSum(S_sum)
         # print(self.__prob.constraints)
 
     def __init_constraint7(self):
@@ -328,21 +332,21 @@ class OCCAMAlg:
                 self.__prob += w_ij == S_ij
 
                 # OR_T d_{i,j}^S
-                D_ij = LpVariable("D_{},{}".format(i,j),cat=LpBinary)
-                D_sum = []
-                for T in self.__H:
-                    m_T_ij = self.__d_T_ij.get("{" + "{},{}".format(i, j) + "}" + "^" + "{}".format(T))
-                    D_sum.append(m_T_ij)
-                    self.__prob += D_ij >= m_T_ij
-                self.__prob += D_ij <= lpSum(D_sum)
-                self.__prob += w_ij == D_ij
+                # D_ij = LpVariable("D_{},{}".format(i,j),cat=LpBinary)
+                # D_sum = []
+                # for T in self.__H:
+                #     m_T_ij = self.__d_T_ij.get("{" + "{},{}".format(i, j) + "}" + "^" + "{}".format(T))
+                #     D_sum.append(m_T_ij)
+                #     self.__prob += D_ij >= m_T_ij
+                # self.__prob += D_ij <= lpSum(D_sum)
+                # self.__prob += w_ij == D_ij
 
-                for S in self.__H:
-                    for T in self.__H:
-                        v_i_ST = self.__v_i_ST.get()
-                        v_j_ST = self.__v_i_ST.get()
-                        m_S_i = self.__m_S_j.get()
-                        m_S_j = self.__m_S_j.get()
+                # for S in self.__H:
+                #     for T in self.__H:
+                #         v_i_ST = self.__v_i_ST.get()
+                #         v_j_ST = self.__v_i_ST.get()
+                #         m_S_i = self.__m_S_j.get()
+                #         m_S_j = self.__m_S_j.get()
 
 
         # print(self.__prob.constraints)
