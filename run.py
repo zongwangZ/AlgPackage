@@ -78,18 +78,28 @@ def get4(f=0):
         E = [(0,5),(1,6),(2,6),(3,7),(4,7),(5,6),(5,7)]
     return overlay_node_set,E
 
-def get5():
-    overlay_node_set = [0, 1, 2, 3, 4, 5]
-    E = [(0, 6), (1, 7), (2, 7), (3, 8), (4, 8), (5, 8), (6, 7), (6, 8)]
-    return overlay_node_set, E
+def get5(f=0):
+    overlay_node_set = None
+    E = None
+    if f == 0:
+        overlay_node_set = [0, 1, 2, 3, 4, 5]
+        E = [(0, 6), (1, 7), (2, 7), (3, 8), (4, 8), (5, 8), (6, 7), (6, 8)]
+        return overlay_node_set, E
+    if f == 1:
+        overlay_node_set = [0, 1, 2, 3, 4, 5]
+        E = [(0, 6), (1, 7), (2, 7), (3, 8), (4, 9), (5, 9), (6, 7), (6, 8),(8,9)]
+        return overlay_node_set, E
 
 
 def doSim_OCCAM():
     logging.config.fileConfig('util/logging.conf')
     logger = logging.getLogger('applog')
     logger.info("-----------------------------------"+"start at "+time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())+"-------------------------------")
-    # overlay_node_set = [0, 1, 2, 3, 4, 5, 6]
-    # E = [(0, 7), (1, 7), (2, 8), (3, 8), (4, 9), (5, 9), (6, 9), (7, 8), (8, 9)]
+    import sys
+    fname = sys.argv[0]
+    with open(fname,"r",encoding="utf-8") as f:
+        content = f.read()
+        logger.debug(content)
     overlay_node_set, E = get4(1)
     network = Network(overlay_node_set, E)
     alg = OCCAMAlg(network, overlay_node_set)

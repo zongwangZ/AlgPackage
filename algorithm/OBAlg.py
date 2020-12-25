@@ -49,7 +49,7 @@ class OCCAMAlg:
         # solver = CPLEX_CMD(keepFiles=True,options=['epgap = 0.25'])
         # solver = PULP_CBC_CMD(gapRel=0.15,timeLimit=1200)
         # solver = PULP_CBC_CMD(gapRel=0.15)
-        solver = PULP_CBC_CMD(timeLimit=7200)
+        solver = PULP_CBC_CMD(timeLimit=4800)
         self.__prob.solve(solver)
         self.__logger.info(LpStatus[self.__prob.status])
 
@@ -64,6 +64,8 @@ class OCCAMAlg:
         self.__init_constraint8_11()  # Boundary  conditions
         self.__init_constraint12()  # Boundary  conditions
         self.__init_constraint13()  # extra constraint
+        # self.__init_constraint14()  # extra constraint 2
+
 
     def __init_constraint1(self):
         """
@@ -142,8 +144,8 @@ class OCCAMAlg:
                 for T_2 in self.__H:
                     if self.__is_DM(S, T_1, T_2):
                         self.__logger.debug("DM:"+str((S, T_1, T_2)))
-                        m1 = self.__m_S_j.get("{0}^{1}".format(S, T_1))
-                        m2 = self.__m_S_j.get("{0}^{1}".format(S, T_2))
+                        m1 = self.__m_S_j.get("{0}^{1}".format(T_1, S))
+                        m2 = self.__m_S_j.get("{0}^{1}".format(T_2, S))
                         self.__prob += m1+1 <= m2
         # print(self.__prob.constraints)
 
@@ -236,14 +238,14 @@ class OCCAMAlg:
                 for i in self.__V:
                     m_i = LpVariable("m_{},{},{}".format(S,i,j),cat=LpInteger)
                     s_S_ij = self.__s_S_ij.get("{" + "{},{}".format(i, j) + "}"+"^"+"{}".format(S))
-                    m_S_i = self.__m_S_j.get("{0}^{1}".format(S,i))
+                    m_S_i = self.__m_S_j.get("{0}^{1}".format(i,S))
                     self.__prob += m_i <= uper_bound * s_S_ij  # z<= Ib
                     self.__prob += m_i <= m_S_i  # z<=i
                     self.__prob += m_i >= m_S_i-(1-s_S_ij)*uper_bound  # z >= i-(1-b)*I
                     self.__prob += m_i >= 0  # z>=0
                     M_sum.append(m_i)
                     S_sum.append(s_S_ij)
-                m_S_j = self.__m_S_j.get("{0}^{1}".format(S,j))
+                m_S_j = self.__m_S_j.get("{0}^{1}".format(j,S))
                 self.__prob += m_S_j == lpSum(M_sum)+lpSum(S_sum)
         # print(self.__prob.constraints)
 
@@ -321,6 +323,7 @@ class OCCAMAlg:
         for i in self.__V:
             for j in self.__V:
                 w_ij = self.__w_ij.get("{" + "{},{}".format(i, j) + "}")
+
                 # OR_S s_{i,j}^S
                 S_ij = LpVariable("S_{},{}".format(i,j),cat=LpBinary)
                 S_sum = []
@@ -348,8 +351,21 @@ class OCCAMAlg:
                 #         m_S_i = self.__m_S_j.get()
                 #         m_S_j = self.__m_S_j.get()
 
-
         # print(self.__prob.constraints)
+
+    def __init_constraint14(self):
+        self.__logger.debug("constraint14 init")
+        for S in self.__H:
+            for T in self.__V:
+                m_S_T = self.__m_S_j.get("{0}^{1}".format(S,T))
+                m_T_S = self.__m_S_j.get("{0}^{1}".format(T,S))
+                self.__prob += m_S_T == m_T_S
+        for i in self.__V:
+            for j in self.__V:
+                w_ij = self.__w_ij.get("{" + "{},{}".format(i, j) + "}")
+                w_ji = self.__w_ij.get("{" + "{},{}".format(j, i) + "}")
+                self.__prob += w_ij == w_ji
+
 
     def __init_V(self):
         """
@@ -360,11 +376,11 @@ class OCCAMAlg:
         self.__node_num = 2*(self.__host_num-1)
         # self.__node_num = 10
         self.__V = []
-        for node in range(0,self.__node_num):
+        for node in range(0, self.__node_num):
             self.__V.append(node)
 
     def __init_variables(self):
-        self.__m_S_j = self.__create_variable1()  # m_T^S
+        self.__m_S_j = self.__create_variable1()  # m_j^S
         self.__w_ij = self.__create_variable2()   # w_ij
         self.__v_i_ST = self.__create_variable3()  # v_i^ST
         self.__s_S_ij = self.__create_variable4()  # s_{i,j}_S
@@ -379,7 +395,7 @@ class OCCAMAlg:
         variables_list = []
         for S in self.__H:
             for j in self.__V:
-                variables_list.append("{0}^{1}".format(S,j))
+                variables_list.append("{0}^{1}".format(j,S))
         variables = LpVariable.dict("m",variables_list,lowBound=0, upBound=upBound, cat=LpInteger) # 自行定义了上届
         # print(variables)
         return variables
@@ -479,6 +495,8 @@ class OCCAMAlg:
                                 self.G.add_edge(i_k_1,i_k_2)
                                 i_k_1 = i_k_2
                                 break
+        for key in pi:
+            pi[key].reverse()
         self.__logger.info(pi)
 
     def plot_inferred_graph(self):
