@@ -100,7 +100,7 @@ def doSim_OCCAM():
     with open(fname,"r",encoding="utf-8") as f:
         content = f.read()
         logger.debug(content)
-    overlay_node_set, E = get4(1)
+    overlay_node_set, E = get5(0)
     network = Network(overlay_node_set, E)
     alg = OCCAMAlg(network, overlay_node_set)
     alg.true_objective_value()

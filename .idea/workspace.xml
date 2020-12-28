@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7aad753a-0b7a-41b0-b837-b709dda3a39a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test/MeasurementTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algorithm/OBAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/OBAlg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/applog.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/applog.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/logging.conf" beforeDir="false" afterPath="$PROJECT_DIR$/util/logging.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/tool.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +58,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/algorithm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TST-python/src/tool.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -64,7 +67,7 @@
       <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\util" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run">
+  <component name="RunManager" selected="Python.MeasurementTest">
     <configuration name="ILPTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AlgPackage" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,6 +90,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="MeasurementTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AlgPackage" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/MeasurementTest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="OBAlg (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AlgPackage" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -101,50 +123,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/algorithm/OBAlg.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="OBAlg" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AlgPackage" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/algorithm" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\张宗旺\Documents\GitHub\AlgPackage\algorithm\OBAlg.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="PulpTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AlgPackage" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/PulpTest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -197,20 +175,39 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tool" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AlgPackage" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../TST-python/src" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../TST-python/src/tool.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.run" />
-      <item itemvalue="Python.OBAlg" />
-      <item itemvalue="Python.PulpTest" />
       <item itemvalue="Python.OBAlg (1)" />
       <item itemvalue="Python.ILPTest" />
+      <item itemvalue="Python.MeasurementTest" />
+      <item itemvalue="Python.tool" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.MeasurementTest" />
+        <item itemvalue="Python.tool" />
         <item itemvalue="Python.run" />
         <item itemvalue="Python.ILPTest" />
         <item itemvalue="Python.OBAlg (1)" />
-        <item itemvalue="Python.PulpTest" />
-        <item itemvalue="Python.OBAlg" />
       </list>
     </recent_temporary>
   </component>
@@ -247,8 +244,16 @@
       <workItem from="1607434675414" duration="14245000" />
       <workItem from="1607925266569" duration="53235000" />
       <workItem from="1608109104589" duration="27215000" />
-      <workItem from="1608353499378" duration="41847000" />
+      <workItem from="1608353499378" duration="63177000" />
     </task>
+    <task id="LOCAL-00001" summary="日志中保存重要结果">
+      <created>1608900546211</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608900546211</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,6 +261,10 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="日志中保存重要结果" />
+    <option name="LAST_COMMIT_MESSAGE" value="日志中保存重要结果" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1559" y="74" key="#Log_Highlighting_(ideolog)" timestamp="1608109302750">
@@ -293,63 +302,68 @@
     </state>
     <state x="246" y="244" width="896" height="580" key="#xdebugger.evaluate/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1607501860067" />
     <state x="246" y="244" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1606622722835" />
+    <state x="385" y="10" key="CommitChangelistDialog2" timestamp="1608900545324">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="385" y="10" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1608900545324" />
     <state width="1534" height="200" key="DebuggerActiveHint" timestamp="1608864993084">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1534" height="437" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608092953397" />
     <state width="1534" height="154" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1607950013919" />
     <state width="1534" height="200" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1608864993084" />
-    <state x="618" y="186" key="FileChooserDialogImpl" timestamp="1605264737134">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-1302" y="186" key="FileChooserDialogImpl" timestamp="1609057665879">
+      <screen x="-1920" y="0" width="1536" height="824" />
     </state>
+    <state x="-1302" y="186" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609057665879" />
     <state x="618" y="186" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605264737134" />
-    <state width="1120" height="280" key="GridCell.Tab.0.bottom" timestamp="1608887246078">
+    <state width="1493" height="280" key="GridCell.Tab.0.bottom" timestamp="1609056317794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1123" height="232" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608727893179" />
-    <state width="1123" height="234" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1608353776588" />
-    <state width="1120" height="280" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608887246078" />
-    <state width="1120" height="280" key="GridCell.Tab.0.center" timestamp="1608887246078">
+    <state width="1493" height="280" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609056317794" />
+    <state width="1120" height="280" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608948005171" />
+    <state width="1493" height="280" key="GridCell.Tab.0.center" timestamp="1609056317794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1123" height="232" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608727893178" />
-    <state width="1123" height="234" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1608353776588" />
-    <state width="1120" height="280" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1608887246078" />
-    <state width="1120" height="280" key="GridCell.Tab.0.left" timestamp="1608887246077">
+    <state width="1493" height="280" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609056317794" />
+    <state width="1120" height="280" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1608948005171" />
+    <state width="1493" height="280" key="GridCell.Tab.0.left" timestamp="1609056317794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1123" height="232" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608727893178" />
-    <state width="1123" height="234" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1608353776588" />
-    <state width="1120" height="280" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1608887246077" />
-    <state width="1120" height="280" key="GridCell.Tab.0.right" timestamp="1608887246078">
+    <state width="1493" height="280" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609056317794" />
+    <state width="1120" height="280" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1608948005170" />
+    <state width="1493" height="280" key="GridCell.Tab.0.right" timestamp="1609056317794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1123" height="232" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608727893178" />
-    <state width="1123" height="234" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1608353776588" />
-    <state width="1120" height="280" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1608887246078" />
-    <state width="746" height="378" key="GridCell.Tab.1.bottom" timestamp="1608883553855">
+    <state width="1493" height="280" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609056317794" />
+    <state width="1120" height="280" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1608948005171" />
+    <state width="1493" height="160" key="GridCell.Tab.1.bottom" timestamp="1609054574774">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="746" height="258" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1608352916833" />
+    <state width="1493" height="160" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609054574774" />
     <state width="746" height="378" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608883553855" />
-    <state width="746" height="378" key="GridCell.Tab.1.center" timestamp="1608883553855">
+    <state width="1493" height="160" key="GridCell.Tab.1.center" timestamp="1609054574773">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="746" height="258" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1608352916833" />
+    <state width="1493" height="160" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609054574773" />
     <state width="746" height="378" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1608883553855" />
-    <state width="746" height="378" key="GridCell.Tab.1.left" timestamp="1608883553855">
+    <state width="1493" height="160" key="GridCell.Tab.1.left" timestamp="1609054574773">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="746" height="258" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1608352916833" />
+    <state width="1493" height="160" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609054574773" />
     <state width="746" height="378" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1608883553855" />
-    <state width="746" height="378" key="GridCell.Tab.1.right" timestamp="1608883553855">
+    <state width="1493" height="160" key="GridCell.Tab.1.right" timestamp="1609054574773">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="746" height="258" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1608352916833" />
+    <state width="1493" height="160" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609054574773" />
     <state width="746" height="378" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1608883553855" />
     <state x="522" y="137" key="RollbackChangesDialog" timestamp="1607330076406">
       <screen x="0" y="0" width="1536" height="824" />
@@ -390,11 +404,23 @@
     <state x="580" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1607504368147" />
     <state x="580" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1608887017583" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test/MeasurementTest.py</url>
+          <line>126</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AlgPackage$ILPAlg.coverage" NAME="ILPAlg Coverage Results" MODIFIED="1606388689058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
     <SUITE FILE_PATH="coverage/AlgPackage$ILPTest.coverage" NAME="ILPTest Coverage Results" MODIFIED="1608003471427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/AlgPackage$MeasurementTest.coverage" NAME="MeasurementTest Coverage Results" MODIFIED="1609054535052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$OCCAMAlg.coverage" NAME="OCCAMAlg Coverage Results" MODIFIED="1606898620176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
-    <SUITE FILE_PATH="coverage/AlgPackage$run.coverage" NAME="run Coverage Results" MODIFIED="1608887246067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AlgPackage$run.coverage" NAME="run Coverage Results" MODIFIED="1609055765390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AlgPackage$network.coverage" NAME="network Coverage Results" MODIFIED="1605265158354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AlgPackage$PulpTest.coverage" NAME="PulpTest Coverage Results" MODIFIED="1607926410258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
   </component>

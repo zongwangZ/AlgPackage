@@ -49,7 +49,7 @@ class OCCAMAlg:
         # solver = CPLEX_CMD(keepFiles=True,options=['epgap = 0.25'])
         # solver = PULP_CBC_CMD(gapRel=0.15,timeLimit=1200)
         # solver = PULP_CBC_CMD(gapRel=0.15)
-        solver = PULP_CBC_CMD(timeLimit=4800)
+        solver = PULP_CBC_CMD()
         self.__prob.solve(solver)
         self.__logger.info(LpStatus[self.__prob.status])
 
@@ -64,7 +64,7 @@ class OCCAMAlg:
         self.__init_constraint8_11()  # Boundary  conditions
         self.__init_constraint12()  # Boundary  conditions
         self.__init_constraint13()  # extra constraint
-        # self.__init_constraint14()  # extra constraint 2
+        self.__init_constraint14()  # extra constraint 2
 
 
     def __init_constraint1(self):
@@ -354,17 +354,22 @@ class OCCAMAlg:
         # print(self.__prob.constraints)
 
     def __init_constraint14(self):
+        """
+
+        对v_i^{S,T}做限制
+        :return:
+        """
         self.__logger.debug("constraint14 init")
         for S in self.__H:
-            for T in self.__V:
-                m_S_T = self.__m_S_j.get("{0}^{1}".format(S,T))
-                m_T_S = self.__m_S_j.get("{0}^{1}".format(T,S))
-                self.__prob += m_S_T == m_T_S
-        for i in self.__V:
-            for j in self.__V:
-                w_ij = self.__w_ij.get("{" + "{},{}".format(i, j) + "}")
-                w_ji = self.__w_ij.get("{" + "{},{}".format(j, i) + "}")
-                self.__prob += w_ij == w_ji
+            for T in self.__H:
+                for i in self.__H:
+                    if S != T:
+                        if i == S or i == T:
+                            self.__prob += self.__v_i_ST.get("{}".format(i)+"^"+"{" + "{},{}".format(S, T) + "}") == 1
+                        else:
+                            self.__prob += self.__v_i_ST.get("{}".format(i)+"^"+"{" + "{},{}".format(S, T) + "}") == 0
+                    elif S == T:
+                        self.__prob += self.__v_i_ST.get("{}".format(i)+"^"+"{" + "{},{}".format(S, T) + "}") == 0
 
 
     def __init_V(self):
