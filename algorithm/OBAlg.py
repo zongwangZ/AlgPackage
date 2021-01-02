@@ -48,8 +48,8 @@ class OCCAMAlg:
         # self.__prob.writeLP("ILP_problem")
         # solver = CPLEX_CMD(keepFiles=True,options=['epgap = 0.25'])
         # solver = PULP_CBC_CMD(gapRel=0.15,timeLimit=1200)
-        # solver = PULP_CBC_CMD(gapRel=0.15)
-        solver = PULP_CBC_CMD()
+        solver = PULP_CBC_CMD(gapRel=0.15)
+        # solver = PULP_CBC_CMD(timeLimit=3600)
         self.__prob.solve(solver)
         self.__logger.info(LpStatus[self.__prob.status])
 
