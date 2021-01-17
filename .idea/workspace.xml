@@ -2,37 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7aad753a-0b7a-41b0-b837-b709dda3a39a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/algorithm/m3.stan" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/fit2021-01-17 15-09-52.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/fit2021-01-17 15-10-14.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/fit2021-01-17 15-22-08.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/fit2021-01-17 15-36-08.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/fit2021-01-17 15-52-16.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/model.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/model_data2021-01-17 15-09-52.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/model_data2021-01-17 15-10-14.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/model_data2021-01-17 15-22-08.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/model_data2021-01-17 15-36-08.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pystan/model_data2021-01-17 15-52-16.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log_config/logging_BI.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/new" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/EdwardTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/Self-definedTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/SocketClient.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/SocketServer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/pymcTest3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/pystanTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/pystanTest2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/applog2020-12-27.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/applog2020_12_30.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/applog2020_12_31.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/applog_BI_2020_01_07.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/pystan2021-01-17 15-09-52.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/pystan2021-01-17 15-10-14.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/pystan2021-01-17 15-22-08.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/pystan2021-01-17 15-36-08.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/pystan2021-01-17 15-52-16.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithm/IdentifyTreeAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/IdentifyTreeAlg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_generator/M3Generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/M3Generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/PulpTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/PulpTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/pymcTest2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/pymcTest2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/Logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/log_config/Logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/logging.conf" beforeDir="false" afterPath="$PROJECT_DIR$/log_config/logging.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,7 +264,7 @@
       <workItem from="1610353026596" duration="8717000" />
       <workItem from="1610676533807" duration="5446000" />
       <workItem from="1610700312035" duration="386000" />
-      <workItem from="1610700720466" duration="25395000" />
+      <workItem from="1610700720466" duration="26315000" />
     </task>
     <task id="LOCAL-00001" summary="日志中保存重要结果">
       <created>1608900546211</created>
@@ -315,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610880432027</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="完成数据保存部分">
+      <created>1610880696690</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1610880696690</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,10 +354,10 @@
     </state>
     <state x="102" y="14" width="896" height="583" key="#xdebugger.evaluate/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1610800918888" />
     <state x="246" y="244" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1606622722835" />
-    <state x="770" y="18" key="CommitChangelistDialog2" timestamp="1610880431112">
+    <state x="770" y="18" key="CommitChangelistDialog2" timestamp="1610880695398">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="770" y="18" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1610880431112" />
+    <state x="770" y="18" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1610880695398" />
     <state x="385" y="10" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1608900545324" />
     <state width="1534" height="200" key="DebuggerActiveHint" timestamp="1610267492997">
       <screen x="0" y="0" width="1536" height="824" />
@@ -442,10 +428,10 @@
     <state x="-1653" y="56" key="SettingsEditor/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608602488440" />
     <state x="203" y="64" key="SettingsEditor/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1610024781971" />
     <state x="272" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1610269293433" />
-    <state x="361" y="149" key="Vcs.Push.Dialog.v2" timestamp="1610880445910">
+    <state x="361" y="149" key="Vcs.Push.Dialog.v2" timestamp="1610880705979">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="149" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1610880445910" />
+    <state x="361" y="149" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1610880705979" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1610800733256">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
