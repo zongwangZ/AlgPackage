@@ -92,7 +92,7 @@ def get5(f=0):
 
 
 def doSim_OCCAM():
-    logging.config.fileConfig('util/logging.conf')
+    logging.config.fileConfig('log_config/logging.conf')
     logger = logging.getLogger('applog')
     logger.info("-----------------------------------"+"start at "+time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())+"-------------------------------")
     import sys
@@ -109,6 +109,23 @@ def doSim_OCCAM():
     alg.inference()
     # alg.plot_inferred_graph()
 
+def doSim_BI():
+    from data_generator.M3Generator import M3Generator
+    logging.config.fileConfig('log_config/logging_BI.conf')
+    logger = logging.getLogger('applogBI')
+    logger.info("-----------------------------------" + "start at " + time.strftime("%Y-%m-%d %H-%M-%S",
+                                                                                    time.localtime()) + "-------------------------------")
+    overlay_node_set, E = get4(1)
+    network = Network(overlay_node_set, E,logger=logger)
+    m3_generator = M3Generator(network,logger=logger)
+    sim_data = m3_generator.getSimData()
+    from algorithm.BIHMCAlg import BIHMC
+    used = "pystan"
+    alg = BIHMC(sim_data,logger,way=used)
+    alg.inference()
+    alg.get_outcome()
+
 if __name__ == '__main__':
-    doSim_OCCAM()
+    # doSim_OCCAM()
     # doSim_1()
+    doSim_BI()

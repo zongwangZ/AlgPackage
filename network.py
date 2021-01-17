@@ -13,8 +13,8 @@ from matplotlib import pyplot as plt
 import logging
 import logging.config
 class Network:
-    def __init__(self, overlay_node_set, edge_set):
-        self.__init_logger()
+    def __init__(self, overlay_node_set, edge_set,logger=None):
+        self.__init_logger(logger)
         self.__overlay_node_set = overlay_node_set
         self.__edge_set = edge_set
         self.G = self.create_graph()
@@ -91,12 +91,21 @@ class Network:
                 break
         return flag
 
-    def __init_logger(self):
+    def getSource(self):
+        return self.__overlay_node_set[0]
+
+    def getDestinations(self):
+        return self.__overlay_node_set[1:]
+
+    def __init_logger(self,logger):
         """
         初始化logger
         :return:
         """
         # self.logger = Logger(logger_name=self.__class__.__name__, log_name=self.__class__.__name__)
         # self.logger.info("初始化"+self.__class__.__name__)
-        logging.config.fileConfig('util/logging.conf')
-        self.__logger = logging.getLogger('applog')
+        if logger is not None:
+            self.__logger = logger
+        else:
+            logging.config.fileConfig('util/logging.conf')
+            self.__logger = logging.getLogger('applog')

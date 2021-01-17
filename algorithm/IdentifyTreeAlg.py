@@ -8,12 +8,7 @@
 @time    : '2020'-'11'-'30' '10':'04':'29'
 @contact : zongwang.zhang@outlook.com
 '''
-import networkx as nx
-import numpy as np
-from matplotlib import pyplot as plt
-import zss
 from util.EditDistanceUtil import *
-from util.Logger import Logger
 import logging.config
 class IdentifyTreeAlg:
     """

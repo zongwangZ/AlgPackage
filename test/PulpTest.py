@@ -23,7 +23,7 @@ anaconda的Lib\site-packages文件中。
 本文件同一级目录中，可以solver.tmpdir指定目录。
 """
 import pulp as pl
-from util import Logger
+
 
 def getCplexSolver():
     """

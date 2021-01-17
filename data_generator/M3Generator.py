@@ -12,15 +12,16 @@
 测量m3
 """
 import numpy as np
-np.random.seed(1)
+np.random.seed(1)  ##
 import random
-random.seed(1)
+random.seed(1)  ##
 import logging
 from logging import config
 from network import Network
 import networkx as nx
+import json
 class M3Generator:
-    def __init__(self,topology:Network, num_time_slots=100, r_ns_true=1.0, p_correct=(0.9, 0.1), logger=None):
+    def __init__(self,topology:Network, num_time_slots=100, r_ns_true=1.0, p_correct=(0.9, 0.5), logger=None):
         self.__init_logger(logger)
         self.__topoloy = topology
         self.__init_params_R(num_time_slots,r_ns_true,p_correct) # 定义参数，对应R实现中的model_par
@@ -50,7 +51,7 @@ class M3Generator:
             "ind_m2":ind_m2, # 共享路径索引 矩阵式 -> 向量式;
             "ind_m3":ind_m3, # 三路子拓扑索引 矩阵式 -> 向量式.
         }
-        self.__logger.info("parameters:",str(self.params))
+        self.__logger.info("parameters:"+str(self.params))
 
     def __construct_index_matrix_R(self,n,mDim=2):
         """
@@ -148,7 +149,21 @@ class M3Generator:
                                 else:
                                     m3_measured[ijk, t] = 4
 
+            return m3_measured
 
+    def getSimData(self):
+        sim_data = {
+            "T":self.params.get("num_time_slots"),
+            "N":self.params.get("num_paths"),
+            "prc":self.params.get("p_correct"),
+            "ind_m2":self.params.get("ind_m2"),
+            "ind_m3":self.params.get("ind_m3"),
+            "m3_observed":self.generateM3(),
+            "true_m2":self.params.get("m2_true"),
+            "r_ns_true":self.params.get("r_ns_true")
+        }
+        self.__logger.info("sim_data:" + str(sim_data))
+        return sim_data
 
 
 
