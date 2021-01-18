@@ -24,9 +24,12 @@ class Network:
         G = nx.Graph()
         for edge in self.__edge_set:
             G.add_edge(edge[0],edge[1])
-        # nx.draw(G, with_labels=True)
-        # plt.show()
         return G
+
+    def plot_tree(self):
+
+        nx.draw(self.G, with_labels=True)
+        plt.show()
 
     def getEdgeSet(self):
         """

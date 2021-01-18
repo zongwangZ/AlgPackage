@@ -91,6 +91,7 @@ def get5(f=0):
         return overlay_node_set, E
 
 
+
 def doSim_OCCAM():
     logging.config.fileConfig('log_config/logging.conf')
     logger = logging.getLogger('applog')
@@ -114,16 +115,23 @@ def doSim_BI():
     logging.config.fileConfig('log_config/logging_BI.conf')
     logger = logging.getLogger('applogBI')
     logger.info("-----------------------------------" + "start at " + time.strftime("%Y-%m-%d %H-%M-%S",
-                                                                                    time.localtime()) + "-------------------------------")
-    overlay_node_set, E = get4(1)
-    network = Network(overlay_node_set, E,logger=logger)
-    m3_generator = M3Generator(network,logger=logger)
-    sim_data = m3_generator.getSimData()
-    from algorithm.BIHMCAlg import BIHMC
-    used = "pystan"
-    alg = BIHMC(sim_data,logger,way=used)
-    alg.inference()
-    alg.get_outcome()
+
+                                                                          time.localtime()) + "-------------------------------")
+    list1 = [([0,1,2,3,4],[(0, 5), (1, 5), (2, 6), (3, 6), (4, 6), (5, 6)]),
+     ([0,1,2,3,4,5,6],[(0,7),(1,8),(2,8),(3,8),(4,9),(5,10),(6,10),(7,8),(7,9),(9,10)]),
+     ([0,1,2,3,4,5,6,7,8],[(0,9),(1,9),(2,11),(3,11),(4,12),(5,12),(6,12),(7,13),(8,13),(9,10),(9,13),(10,11),(10,12)]),
+     ((0,1,2,3,4,5,6,7,8,9,10),[(0,11),(1,12),(2,13),(3,14),(4,14),(5,14),(6,15),(7,15),(8,16),(9,16),(10,16),(11,12),(11,15),(12,13),(13,14),(15,16)])]
+    for (overlay_node_set, E) in list1:
+        # overlay_node_set, E = get4(1)
+        network = Network(overlay_node_set, E,logger=logger)
+        network.plot_tree()
+        m3_generator = M3Generator(network,logger=logger)
+        sim_data = m3_generator.getSimData()
+        from algorithm.BIHMCAlg import BIHMC
+        used = "pystan"
+        alg = BIHMC(sim_data,logger,way=used)
+        alg.inference()
+        alg.get_outcome()
 
 if __name__ == '__main__':
     # doSim_OCCAM()
