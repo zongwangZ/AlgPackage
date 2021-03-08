@@ -15,8 +15,8 @@ from matplotlib import pyplot as plt
 import logging.config
 
 class OCCAMAlg:
-    def __init__(self,network, host_node_set, alpha=0.5):
-        self.__init_logger()
+    def __init__(self,network, host_node_set, alpha=0.5,logger=None):
+        self.__init_logger(logger)
         self.__network = network
         self.__alpha = alpha
         self.__H = host_node_set
@@ -48,14 +48,14 @@ class OCCAMAlg:
         # self.__prob.writeLP("ILP_problem")
         # solver = CPLEX_CMD(keepFiles=True,options=['epgap = 0.25'])
         # solver = PULP_CBC_CMD(gapRel=0.15,timeLimit=1200)
-        solver = PULP_CBC_CMD(gapRel=0.15)
+        solver = PULP_CBC_CMD()
         # solver = PULP_CBC_CMD(timeLimit=3600)
         self.__prob.solve(solver)
         self.__logger.info(LpStatus[self.__prob.status])
 
     def __init_constraints(self):
-        self.__init_constraint1()  # Path sharing
-        self.__init_constraint2()  # Distance metrics
+        # self.__init_constraint1()  # Path sharing
+        # self.__init_constraint2()  # Distance metrics
         self.__init_constraint3()  # Source tree property
         self.__init_constraint4()  # Source-oblivous path
         self.__init_constraint5()  # Populating the d_{i,j}^T variables
@@ -66,6 +66,49 @@ class OCCAMAlg:
         self.__init_constraint13()  # extra constraint
         self.__init_constraint14()  # extra constraint 2
 
+    def __soft_handle(self):
+        """
+        将PSM约束  和 DM 约束 加入到目标函数中去
+        :return:
+        """
+        self.__logger.debug("soft handle")
+        component3 = None
+        # PSM
+        for S in self.__H:
+            for T_1 in self.__H:
+                for T_2 in self.__H:
+                    for T_3 in self.__H:
+                        if self.__is_PSM(S,T_1,T_2,T_3):
+                            self.__logger.debug("PSM:"+str((S,T_1,T_2,T_3)))
+                            LHS = []
+                            for i in self.__V:
+                                v_1 = self.__v_i_ST.get("{}".format(i)+"^"+"{" + "{},{}".format(S, T_1) + "}")
+                                v_2 = self.__v_i_ST.get("{}".format(i) + "^" + "{" + "{},{}".format(S, T_2) + "}")
+                                LHS_i = LpVariable("LHS_{},{},{},{},{}".format(S,T_1,T_2,T_3,i),cat=LpBinary)
+                                self.__prob += LHS_i <= v_1
+                                self.__prob += LHS_i <= v_2
+                                self.__prob += LHS_i >= v_1+v_2-1
+                                LHS.append(LHS_i)
+                            RHS = []
+                            for i in self.__V:
+                                v_2 = self.__v_i_ST.get("{}".format(i) + "^" + "{" + "{},{}".format(S, T_2) + "}")
+                                v_3 = self.__v_i_ST.get("{}".format(i) + "^" + "{" + "{},{}".format(S, T_3) + "}")
+                                RHS_i = LpVariable("RHS_{},{},{},{},{}".format(S,T_1,T_2,T_3,i),cat=LpBinary)
+                                self.__prob += RHS_i <= v_2
+                                self.__prob += RHS_i <= v_3
+                                self.__prob += RHS_i >= v_2 + v_3 - 1
+                                RHS.append(RHS_i)
+                            component3 += lpSum(LHS) - lpSum(RHS)
+        # DM
+        for S in self.__H:
+            for T_1 in self.__H:
+                for T_2 in self.__H:
+                    if self.__is_DM(S, T_1, T_2):
+                        self.__logger.debug("DM:"+str((S, T_1, T_2)))
+                        m1 = self.__m_S_j.get("{0}^{1}".format(T_1, S))
+                        m2 = self.__m_S_j.get("{0}^{1}".format(T_2, S))
+                        component3 += m1 - m2
+        return component3
 
     def __init_constraint1(self):
         """
@@ -472,7 +515,8 @@ class OCCAMAlg:
                 m_S_T.append(self.__m_S_j.get("{0}^{1}".format(S,T)))
         component1 = self.__alpha*lpSum(m_S_T)
         component2 = (1-self.__alpha)*lpSum(self.__w_ij)  # 最少链路
-        self.__prob += component1 + component2
+        component3 = self.__soft_handle()
+        self.__prob += component1 + component2 + component3
         # print(self.__prob.objective)
 
     def inference(self):
@@ -533,15 +577,16 @@ class OCCAMAlg:
         self.__logger.info("true objective value:"+str(value))
         return value
 
-    def __init_logger(self):
+    def __init_logger(self,logger):
         """
         初始化logger
         :return:
         """
-        # self.logger = Logger(logger_name=self.__class__.__name__, log_name=self.__class__.__name__)
-        # self.logger.info("初始化"+self.__class__.__name__)
-        logging.config.fileConfig('util/logging.conf')
-        self.__logger = logging.getLogger('applog')
+        if logger is not None:
+            self.__logger = logger
+        else:
+            logging.config.fileConfig('log_config/logging.conf')
+            self.__logger = logging.getLogger('applog')
 
     def exportModel(self):
         """

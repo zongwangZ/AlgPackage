@@ -110,5 +110,5 @@ class Network:
         if logger is not None:
             self.__logger = logger
         else:
-            logging.config.fileConfig('util/logging.conf')
+            logging.config.fileConfig('log_config/logging.conf')
             self.__logger = logging.getLogger('applog')

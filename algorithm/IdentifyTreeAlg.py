@@ -23,7 +23,6 @@ class IdentifyTreeAlg:
         self.__init_tunnels()
         self.G = self.__createNetwork()
         self.__node_no = self.__overlay_node_num+1
-        self.inference()
 
 
     def __init_tunnels(self):
@@ -69,8 +68,8 @@ class IdentifyTreeAlg:
         self.__node_no += 1
         for node in X_k_star:
             self.G.add_edge(node,p_X_k_star)
-        # nx.draw(self.G,with_labels=True)
-        # plt.show()
+        nx.draw(self.G,with_labels=True)
+        plt.show()
         # 对应步骤7
         for node in X_k_star:
             delete_index = []
@@ -146,5 +145,5 @@ class IdentifyTreeAlg:
         """
         # self.logger = Logger(logger_name=self.__class__.__name__, log_name=self.__class__.__name__)
         # self.logger.info("初始化"+self.__class__.__name__)
-        logging.config.fileConfig('util/logging.conf')
+        logging.config.fileConfig('log_config/logging.conf')
         self.__logger = logging.getLogger('applog')

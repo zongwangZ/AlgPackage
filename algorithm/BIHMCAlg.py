@@ -21,6 +21,7 @@ from logging import config
 import logging
 import time
 import pandas as pd
+import matplotlib.pyplot as plt
 
 class BIHMC:
 
@@ -79,11 +80,15 @@ class BIHMC:
 
 
 
+
+
     def get_outcome_pystan(self):
         if file_exists(self.fit_path_stan):
             fit = self.load_fit_pystan(self.fit_path_stan)
             la = fit.extract(permuted=True)
             m2_samples = la["m2"]
+            plt.acorr(m2_samples[:,0])
+            plt.show()
             assert isinstance(m2_samples,np.ndarray)
             self.__logger.info("m2_samples:"+str(m2_samples))
             inferred_m2_real = np.mean(m2_samples,axis=0)
@@ -126,11 +131,12 @@ class BIHMC:
         fit = sm.sampling(data=model_data,
                           chains=4,
                           # warmup=1000,
-                          init=model_init,
-                          iter=2000,
+                          # init=model_init,
+                          iter=4000,
                           seed=20200829,
                           # algorithm="HMC",
                           control=dict(max_treedepth=12, adapt_delta=0.90),
+                          # control=dict(adapt_delta=0.90)
                           )
         self.save_samples_tocsv(fit)
         return fit
@@ -198,3 +204,5 @@ class BIHMC:
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         fh.setFormatter(formatter)
         logger.addHandler(fh)
+
+

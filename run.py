@@ -101,9 +101,9 @@ def doSim_OCCAM():
     with open(fname,"r",encoding="utf-8") as f:
         content = f.read()
         logger.debug(content)
-    overlay_node_set, E = get5(1)
-    network = Network(overlay_node_set, E)
-    alg = OCCAMAlg(network, overlay_node_set)
+    overlay_node_set, E = get4(1)
+    network = Network(overlay_node_set, E,logger=logger)
+    alg = OCCAMAlg(network, overlay_node_set,logger=logger)
     alg.true_objective_value()
     alg.solve()
     alg.getOutcome()
@@ -118,14 +118,15 @@ def doSim_BI():
 
                                                                           time.localtime()) + "-------------------------------")
     list1 = [([0,1,2,3,4],[(0, 5), (1, 5), (2, 6), (3, 6), (4, 6), (5, 6)]),
-     ([0,1,2,3,4,5,6],[(0,7),(1,8),(2,8),(3,8),(4,9),(5,10),(6,10),(7,8),(7,9),(9,10)]),
-     ([0,1,2,3,4,5,6,7,8],[(0,9),(1,9),(2,11),(3,11),(4,12),(5,12),(6,12),(7,13),(8,13),(9,10),(9,13),(10,11),(10,12)]),
-     ((0,1,2,3,4,5,6,7,8,9,10),[(0,11),(1,12),(2,13),(3,14),(4,14),(5,14),(6,15),(7,15),(8,16),(9,16),(10,16),(11,12),(11,15),(12,13),(13,14),(15,16)])]
+     # ([0,1,2,3,4,5,6],[(0,7),(1,8),(2,8),(3,8),(4,9),(5,10),(6,10),(7,8),(7,9),(9,10)]),
+     # ([0,1,2,3,4,5,6,7,8],[(0,9),(1,9),(2,11),(3,11),(4,12),(5,12),(6,12),(7,13),(8,13),(9,10),(9,13),(10,11),(10,12)]),
+     # ((0,1,2,3,4,5,6,7,8,9,10),[(0,11),(1,12),(2,13),(3,14),(4,14),(5,14),(6,15),(7,15),(8,16),(9,16),(10,16),(11,12),(11,15),(12,13),(13,14),(15,16)])
+    ]
     for (overlay_node_set, E) in list1:
         # overlay_node_set, E = get4(1)
         network = Network(overlay_node_set, E,logger=logger)
         network.plot_tree()
-        m3_generator = M3Generator(network,logger=logger)
+        m3_generator = M3Generator(network,num_time_slots=1000,logger=logger)
         sim_data = m3_generator.getSimData()
         from algorithm.BIHMCAlg import BIHMC
         used = "pystan"
