@@ -88,15 +88,25 @@ class M3Measure:
         self.m2Measure = M2Measure(network,p_correct)
 
     def measure_m3(self,node1,node2,node3):
-        assert node1<node2<node3
         type = None
-        m2_12 = self.m2Measure.measure_m2(node1,node2)
-        m2_13 = self.m2Measure.measure_m2(node1,node3)
-        m2_23 = self.m2Measure.measure_m2(node2,node3)
+        if node1 > node2:
+            m2_12 = self.m2Measure.measure_m2(node2,node1)
+        else:
+            m2_12 = self.m2Measure.measure_m2(node1,node2)
+        if node1 > node3:
+            m2_13 = self.m2Measure.measure_m2(node3,node1)
+        else:
+            m2_13 = self.m2Measure.measure_m2(node1,node3)
+        if node2 > node3:
+            m2_23 = self.m2Measure.measure_m2(node3,node2)
+        else:
+            m2_23 = self.m2Measure.measure_m2(node2,node3)
         if m2_12 == m2_13 == m2_23:
             type = 0
         elif m2_12 > m2_13 == m2_23:
             type = 1
+        elif m2_13 > m2_12 == m2_23:
+            type = 2
         elif m2_12 == m2_13 < m2_23:
             type = 3
         else:  # 由于编号规则，type为2的类型不可能，所以type为2以及其他情况，随机type
@@ -109,7 +119,7 @@ class M3Measure:
         for iIndex in range(num_paths):
             for jIndex in range(num_paths):
                 for kIndex in range(num_paths):
-                    if iIndex < jIndex < kIndex:
+                    if iIndex != jIndex and iIndex != kIndex and jIndex != kIndex:
                         node1 = iIndex+1
                         node2 = jIndex+1
                         node3 = kIndex+1
