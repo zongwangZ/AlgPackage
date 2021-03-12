@@ -20,6 +20,12 @@ from logging import config
 from network import Network
 import networkx as nx
 import json
+"""
+关键参数:
+num_time_slots:1个测量周期内的测量次数, 影响程序运行时间
+r_ns_true:网络处于"适宜状态"的概率
+p_correct:在网络适宜/非适宜情况下测量正确的概率，需要变化这个概率观察算法精度
+"""
 class M3Generator:
     def __init__(self,topology:Network, num_time_slots=100, r_ns_true=1.0, p_correct=(0.9, 0.5), logger=None):
         self.__init_logger(logger)
@@ -51,7 +57,7 @@ class M3Generator:
             "ind_m2":ind_m2, # 共享路径索引 矩阵式 -> 向量式;
             "ind_m3":ind_m3, # 三路子拓扑索引 矩阵式 -> 向量式.
         }
-        self.__logger.info("parameters:"+str(self.params))
+        # self.__logger.info("parameters:"+str(self.params))
 
     def __construct_index_matrix_R(self,n,mDim=2):
         """
@@ -162,7 +168,7 @@ class M3Generator:
             "true_m2":self.params.get("m2_true"),
             "r_ns_true":self.params.get("r_ns_true")
         }
-        self.__logger.info("sim_data:" + str(sim_data))
+        # self.__logger.info("sim_data:" + str(sim_data))
         return sim_data
 
 

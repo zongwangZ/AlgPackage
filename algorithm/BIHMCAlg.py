@@ -30,8 +30,8 @@ class BIHMC:
         self.now_time = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
         # 配置logger
         self.__init_logger(logger)
-        if way == "pystan":
-            self.config_pystan_logger()
+        # if way == "pystan":
+        #     self.config_pystan_logger()
 
 
         # 参数
@@ -50,6 +50,7 @@ class BIHMC:
         if self.way == "pystan":
             self.data_path_pystan = "data/pystan/"  # pystan 数据的根目录
             self.model_path_stan = 'algorithm/m3.stan'  # stan 模型文件
+            # self.model_path_stan = 'algorithm/new_m3.stan'  # new stan 模型文件
             self.cmodel_path_stan = self.data_path_pystan + "model" + ".pkl"  # 编译后的模型文件
             self.fit_path_stan = self.data_path_pystan + "fit" + \
                                  self.now_time + ".pkl"  # fit路径
@@ -76,7 +77,7 @@ class BIHMC:
 
     def get_outcome(self, way="pystan"):
         if way == "pystan":
-            self.get_outcome_pystan()
+            return self.get_outcome_pystan()
 
 
 
@@ -90,10 +91,11 @@ class BIHMC:
             plt.acorr(m2_samples[:,0])
             plt.show()
             assert isinstance(m2_samples,np.ndarray)
-            self.__logger.info("m2_samples:"+str(m2_samples))
+            # self.__logger.info("m2_samples:"+str(m2_samples))
             inferred_m2_real = np.mean(m2_samples,axis=0)
             self.__logger.info("inferred_m2_real:"+str(inferred_m2_real))
             self.__logger.info("self.true_m2:"+str(self.true_m2))
+            return inferred_m2_real,self.true_m2
 
 
         else:
@@ -108,9 +110,11 @@ class BIHMC:
             m3_observed=self.m3_observed,
             prc=self.prc,
             index_m2=self.ind_m2,
-            index_m3=self.ind_m3
+            index_m3=self.ind_m3,
+            # net_status = np.random.uniform(0,1,self.T), #对应new_m3.stan，减小难度
+            # r_ns = 1.0  # 对应new_m3.stan 减小难度
         )
-        self.__logger.info("model data is "+str(model_data))
+        # self.__logger.info("model data is "+str(model_data))
         # 保存模型数据
         pystan.misc.stan_rdump(model_data, self.model_data_path_stan)
         self.__logger.info("保存模型数据到:"+self.model_data_path_stan)
@@ -128,11 +132,15 @@ class BIHMC:
                         net_status=np.random.uniform(low=0,high=1,size=self.T),
                         r_n2 = self.r_ns_true)  # 暂时不进行初始化
 
+        # def model_init():
+        #     return dict(m2=true_m2 + np.random.uniform(0,1.0,len(true_m2)),
+        #                 )  # 暂时不进行初始化
+
         fit = sm.sampling(data=model_data,
                           chains=4,
                           # warmup=1000,
-                          # init=model_init,
-                          iter=4000,
+                          init=model_init,
+                          iter=10,
                           seed=20200829,
                           # algorithm="HMC",
                           control=dict(max_treedepth=12, adapt_delta=0.90),
