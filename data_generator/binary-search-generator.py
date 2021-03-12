@@ -132,7 +132,8 @@ class M3Measure:
 
 def gen1():
     logger = logging.getLogger("data_generator")
-    overlay_node_set, E = ([0, 1, 2, 3, 4], [(0, 5), (1, 5), (2, 6), (3, 6), (4, 6), (5, 6)])
+    # overlay_node_set, E = ([0, 1, 2, 3, 4], [(0, 5), (1, 5), (2, 6), (3, 6), (4, 6), (5, 6)])
+    overlay_node_set, E = ([0,1,2,3,4],[(0, 5), (1, 5), (2, 6), (3, 6), (4, 6), (5, 6)])
     network = Network(overlay_node_set, E, logger=logger)
     network.plot_tree()
     p_correct = 0.6

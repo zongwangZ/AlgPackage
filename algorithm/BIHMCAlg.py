@@ -140,7 +140,7 @@ class BIHMC:
                           chains=4,
                           # warmup=1000,
                           init=model_init,
-                          iter=10,
+                          iter=1000,
                           seed=20200829,
                           # algorithm="HMC",
                           control=dict(max_treedepth=12, adapt_delta=0.90),

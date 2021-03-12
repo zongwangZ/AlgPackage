@@ -31,10 +31,10 @@ def do_sim1():
     logger = logging.getLogger('applogBI')
     logger.info("-"*10 + "start at " + systime + "-"*10)
     overlay_node_set, E = ([0,1,2,3,4,5],[(0, 6), (1, 7), (2, 7), (3, 8), (4, 8), (5, 8), (6, 7), (6, 8)])
-
+    times = 10
     p_correct_set = np.linspace(1,0.5,6)
     for p_correct in p_correct_set:
-        for i in range(10):
+        for i in range(times):
             logger.info(f"第{str(i)}次实验")
             logger.info("p_correct:"+str(p_correct))
             network = Network(overlay_node_set, E, logger=logger)
