@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7aad753a-0b7a-41b0-b837-b709dda3a39a" name="Default Changelist" comment="完成数据保存部分">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithm/BIHMCAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/BIHMCAlg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_generator/binary-search-generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/binary-search-generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_BIHMCAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_BIHMCAlg.py" afterDir="false" />
-    </list>
+    <list default="true" id="7aad753a-0b7a-41b0-b837-b709dda3a39a" name="Default Changelist" comment="完成数据保存部分" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -270,7 +264,7 @@
       <workItem from="1615364512030" duration="599000" />
       <workItem from="1615365138536" duration="298000" />
       <workItem from="1615365538139" duration="806000" />
-      <workItem from="1615366360786" duration="22240000" />
+      <workItem from="1615366360786" duration="22665000" />
     </task>
     <task id="LOCAL-00001" summary="日志中保存重要结果">
       <created>1608900546211</created>

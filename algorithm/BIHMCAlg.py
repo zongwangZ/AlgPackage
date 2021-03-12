@@ -11,7 +11,7 @@
 """
 贝叶斯后验估计+汉密尔顿蒙特卡洛采样
 """
-import pymc3 as pm
+# import pymc3 as pm
 import numpy as np
 import math
 import pystan
