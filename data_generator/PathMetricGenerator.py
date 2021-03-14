@@ -10,6 +10,7 @@
 '''
 """
 生成PSM 和 DM
+用于OBAlg算法的输入
 """
 import numpy as np
 import logging

@@ -8,12 +8,12 @@
 @time    : '2020'-'11'-'30' '10':'04':'29'
 @contact : zongwang.zhang@outlook.com
 '''
+"""
+Topoloy Discovery Using Path Interference中Algorithm2方法的实现
+"""
 from util.EditDistanceUtil import *
 import logging.config
 class IdentifyTreeAlg:
-    """
-   Topoloy Discovery Using Path Interference中Algorithm2方法的实现
-    """
     def __init__(self,network,overlay_node_set:list,interference_matrix:np.ndarray):
         self.__init_logger()
         self.__network = network

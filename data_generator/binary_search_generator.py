@@ -8,12 +8,16 @@
 @time    : '2021'-'03'-'10' '18':'48':'31'
 @contact : zongwang.zhang@outlook.com
 '''
+"""
+用于给二分算法生成数据用的文件
+"""
 from data_generator.M3Generator import M3Generator
 from network import Network
 import logging
 import networkx as nx
 import numpy as np
 from util.tool import EtoVTree
+from util.tool import VTreetoE
 import json
 class M2Measure:
     def __init__(self,network:Network,p_correct):
@@ -143,7 +147,7 @@ def gen1():
         measured_m2 = m2Measure.measure_m2_all()
         print(measured_m2)
 
-def gen_data_binary_search1():
+def gen_data_binary_search_p_correct():
     """
     变化测量正确的概率
     :return:
@@ -170,6 +174,37 @@ def gen_data_binary_search1():
             data_dict["topo_3_data"][str(p_correct)].append(measured_m3)
     with open("../data/binary_search/p_correct_set.txt","w") as f:
         json.dump(data_dict,f,indent=4)
+
+def gen_data_binary_search_topo_zoo():
+    logger = logging.getLogger("data_generator")
+    from data.topo_zoo.init import topo_zoo_set
+    times = 100
+    p_correct = 0.9
+    for overlay_nodes,vector_tree in topo_zoo_set:
+        data_dict = {}
+        data_dict["probability"] = [str(p_correct)]
+        data_dict["tree_vector"] = vector_tree
+        data_dict["experiment_times"] = times
+        data_dict["num_leaf"] = len(overlay_nodes) - 1
+        E = VTreetoE(vector_tree)
+        network = Network(overlay_nodes, E, logger=logger)
+        network.plot_tree()
+        data_dict["topo_3_data"] = {}
+        data_dict["topo_3_data"][str(p_correct)] = []
+        for i in range(times):
+            m3_generator = M3Measure(network,p_correct=p_correct)
+            measured_m3 = m3_generator.measure_m3_all()
+            print(measured_m3)
+            data_dict["topo_3_data"][str(p_correct)].append(measured_m3)
+        with open("../data/binary_search/"+str(vector_tree)+".json","w") as f:
+            json.dump(data_dict,f,indent=4)
+
+
+
+
+
 if __name__ == '__main__':
-    gen_data_binary_search1()
+    # gen_data_binary_search_p_correct()
+    # gen_data_binary_search_topo_zoo()
     # gen1()
+    pass

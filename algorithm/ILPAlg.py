@@ -11,11 +11,11 @@
 from pulp import *
 import numpy as np
 
-
+"""
+  Topoloy Discovery Using Path Interference中ILP方法的实现
+"""
 class ILPAlg:
-    """
-    Topoloy Discovery Using Path Interference中ILP方法的实现
-    """
+
     def __init__(self, node_num, overlay_node_num, interference_matrix):
         self.__node_num = node_num
         self.__overlay_node_num = overlay_node_num

@@ -21,6 +21,10 @@ from network import Network
 import networkx as nx
 import json
 """
+用于BIHMCAlg的输入数据生成
+"""
+
+"""
 关键参数:
 num_time_slots:1个测量周期内的测量次数, 影响程序运行时间
 r_ns_true:网络处于"适宜状态"的概率

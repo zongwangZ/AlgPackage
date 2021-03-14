@@ -8,6 +8,9 @@
 @time    : '2020'-'11'-'13' '18':'44':'56'
 @contact : zongwang.zhang@outlook.com
 '''
+"""
+用于IdentifyTreeAlg的输入数据生成
+"""
 from network import Network
 import numpy as np
 
