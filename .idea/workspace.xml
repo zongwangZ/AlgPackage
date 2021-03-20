@@ -2,19 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7aad753a-0b7a-41b0-b837-b709dda3a39a" name="Default Changelist" comment="完成数据保存部分">
-      <change afterPath="$PROJECT_DIR$/algorithm/LSPBSAlg.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm/RNJ.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm/RNJAlg.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm/runRNJ.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generator/rnj_m2_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_fuction/plot_binary_search.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithm/ILPAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/ILPAlg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithm/IdentifyTreeAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/IdentifyTreeAlg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_generator/InterferenceMatrixGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/InterferenceMatrixGenerator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_generator/M3Generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/M3Generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_generator/PathMetricGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/PathMetricGenerator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_generator/binary-search-generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/binary_search_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm/BIHMCAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/BIHMCAlg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm/RNJAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/RNJAlg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm/m3.stan" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/m3.stan" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm/new_m3.stan" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/new_m3.stan" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generator/binary_search_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/binary_search_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generator/rnj_m2_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/rnj_m2_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/record.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/record.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plot_fuction/plot_binary_search_NJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot_fuction/plot_binary_search_NJ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_BIHMCAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_BIHMCAlg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_RNJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_RNJ.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,20 +69,21 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/algorithm/m3.stan" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data\binary_search\0.9" />
+      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage" />
+      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data\topo_zoo" />
+      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data" />
+      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data\pystan" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data\binary_search\xt_result" />
       <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\algorithm" />
       <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data\topo_zoo" />
       <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\util" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data\topo_zoo" />
-      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data" />
-      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\data\pystan" />
-      <recent name="C:\Users\张宗旺\Documents\GitHub\AlgPackage\log_config" />
-    </key>
   </component>
-  <component name="RunManager" selected="Python.plot_binary_search">
+  <component name="RunManager" selected="Python.run_BIHMCAlg">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="AlgPackage" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,6 +110,9 @@
       <module name="AlgPackage" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_generator" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -125,45 +128,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="gen_topo_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AlgPackage" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/topo_zoo" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/topo_zoo/gen_topo_dataset.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="plot_binary_search" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AlgPackage" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/plot_fuction" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plot_fuction/plot_binary_search.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="plot_topology_zoo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="plot_binary_search_NJ (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AlgPackage" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -171,12 +136,34 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/topo_zoo" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/plot_fuction" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/topo_zoo/plot_topology_zoo.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plot_fuction/plot_binary_search_NJ.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="rnj_m2_generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AlgPackage" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_generator" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_generator/rnj_m2_generator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -204,20 +191,42 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="run_RNJ" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AlgPackage" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_RNJ.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.run_BIHMCAlg" />
-      <item itemvalue="Python.plot_binary_search" />
-      <item itemvalue="Python.gen_topo_dataset" />
+      <item itemvalue="Python.rnj_m2_generator" />
+      <item itemvalue="Python.run_RNJ" />
+      <item itemvalue="Python.plot_binary_search_NJ (1)" />
       <item itemvalue="Python.binary_search_generator" />
-      <item itemvalue="Python.plot_topology_zoo" />
+      <item itemvalue="Python.run_BIHMCAlg" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.plot_binary_search" />
-        <item itemvalue="Python.binary_search_generator" />
-        <item itemvalue="Python.gen_topo_dataset" />
-        <item itemvalue="Python.plot_topology_zoo" />
         <item itemvalue="Python.run_BIHMCAlg" />
+        <item itemvalue="Python.plot_binary_search_NJ (1)" />
+        <item itemvalue="Python.run_RNJ" />
+        <item itemvalue="Python.rnj_m2_generator" />
+        <item itemvalue="Python.binary_search_generator" />
       </list>
     </recent_temporary>
   </component>
@@ -279,7 +288,11 @@
       <workItem from="1615364512030" duration="599000" />
       <workItem from="1615365138536" duration="298000" />
       <workItem from="1615365538139" duration="806000" />
-      <workItem from="1615366360786" duration="44232000" />
+      <workItem from="1615366360786" duration="57397000" />
+      <workItem from="1615792303715" duration="55903000" />
+      <workItem from="1616135166189" duration="1606000" />
+      <workItem from="1616142060935" duration="1980000" />
+      <workItem from="1616169919671" duration="5255000" />
     </task>
     <task id="LOCAL-00001" summary="日志中保存重要结果">
       <created>1608900546211</created>
@@ -395,10 +408,6 @@
       <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state x="-1510" y="185" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608102176609" />
-    <state x="498" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607329514522">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="498" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1607329514522" />
     <state x="278" y="287" width="488" height="506" key="#xdebugger.evaluate" timestamp="1615712416012">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -409,12 +418,12 @@
     </state>
     <state x="367" y="20" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615191138231" />
     <state x="385" y="10" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1608900545324" />
-    <state width="1534" height="200" key="DebuggerActiveHint" timestamp="1615426509659">
+    <state width="1534" height="200" key="DebuggerActiveHint" timestamp="1615926697745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1534" height="437" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608092953397" />
-    <state width="1534" height="189" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615363186431" />
-    <state width="1534" height="200" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1615426509659" />
+    <state width="1534" height="189" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615731792751" />
+    <state width="1534" height="200" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1615926697745" />
     <state x="53" y="184" width="1350" height="638" key="DiffContextDialog" timestamp="1615274351626">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -424,58 +433,54 @@
     </state>
     <state x="-1302" y="186" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1614411207666" />
     <state x="618" y="186" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615513837899" />
-    <state width="1493" height="321" key="GridCell.Tab.0.bottom" timestamp="1615712449825">
+    <state width="1493" height="263" key="GridCell.Tab.0.bottom" timestamp="1616129819092">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="174" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609158968559" />
-    <state width="1493" height="321" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712449825" />
-    <state width="1493" height="246" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1615686084116" />
-    <state width="1493" height="321" key="GridCell.Tab.0.center" timestamp="1615712449825">
+    <state width="1493" height="263" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616129819092" />
+    <state width="723" height="263" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
+    <state width="1493" height="263" key="GridCell.Tab.0.center" timestamp="1616129819091">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="174" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609158968559" />
-    <state width="1493" height="321" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712449825" />
-    <state width="1493" height="246" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1615686084116" />
-    <state width="1493" height="321" key="GridCell.Tab.0.left" timestamp="1615712449825">
+    <state width="1493" height="263" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616129819091" />
+    <state width="723" height="263" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
+    <state width="1493" height="263" key="GridCell.Tab.0.left" timestamp="1616129819091">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="174" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609158968559" />
-    <state width="1493" height="321" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712449825" />
-    <state width="1493" height="246" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1615686084116" />
-    <state width="1493" height="321" key="GridCell.Tab.0.right" timestamp="1615712449825">
+    <state width="1493" height="263" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616129819091" />
+    <state width="723" height="263" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1615974913018" />
+    <state width="1493" height="263" key="GridCell.Tab.0.right" timestamp="1616129819092">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="174" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609158968559" />
-    <state width="1493" height="321" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712449825" />
-    <state width="1493" height="246" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1615686084116" />
-    <state width="1493" height="321" key="GridCell.Tab.1.bottom" timestamp="1615712449825">
+    <state width="1493" height="263" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616129819092" />
+    <state width="723" height="263" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
+    <state width="1493" height="263" key="GridCell.Tab.1.bottom" timestamp="1616129819092">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="1493" height="321" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712449825" />
-    <state width="1493" height="246" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1615686084116" />
-    <state width="1493" height="321" key="GridCell.Tab.1.center" timestamp="1615712449825">
+    <state width="1493" height="263" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616129819092" />
+    <state width="723" height="263" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1615974913020" />
+    <state width="1493" height="263" key="GridCell.Tab.1.center" timestamp="1616129819092">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="1493" height="321" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712449825" />
-    <state width="1493" height="246" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1615686084116" />
-    <state width="1493" height="321" key="GridCell.Tab.1.left" timestamp="1615712449825">
+    <state width="1493" height="263" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616129819092" />
+    <state width="723" height="263" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
+    <state width="1493" height="263" key="GridCell.Tab.1.left" timestamp="1616129819092">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="1493" height="321" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712449825" />
-    <state width="1493" height="246" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1615686084116" />
-    <state width="1493" height="321" key="GridCell.Tab.1.right" timestamp="1615712449825">
+    <state width="1493" height="263" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616129819092" />
+    <state width="723" height="263" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
+    <state width="1493" height="263" key="GridCell.Tab.1.right" timestamp="1616129819092">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="1493" height="321" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712449825" />
-    <state width="1493" height="246" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1615686084116" />
-    <state x="522" y="137" key="RollbackChangesDialog" timestamp="1607330076406">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="522" y="137" key="RollbackChangesDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1607330076406" />
+    <state width="1493" height="263" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616129819092" />
+    <state width="723" height="263" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1615974913020" />
     <state x="-1653" y="56" key="SettingsEditor" timestamp="1614411485718">
       <screen x="-1920" y="0" width="1536" height="824" />
     </state>
@@ -495,20 +500,20 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615511517342" />
-    <state x="461" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1615366361147">
+    <state x="461" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1616142069941">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1459" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1614411202274" />
-    <state x="461" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615366361147" />
+    <state x="461" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616142069941" />
     <state x="461" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1614319972632" />
-    <state x="546" y="182" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1607330568119">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="546" y="182" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1607330568119" />
     <state x="465" y="215" key="git4idea.merge.GitPullDialog" timestamp="1609941119424">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="465" y="215" key="git4idea.merge.GitPullDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1609941119424" />
+    <state x="361" y="74" key="scopes" timestamp="1616128669523">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="74" key="scopes/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616128669523" />
     <state x="-1340" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1609900939597">
       <screen x="-1920" y="0" width="1536" height="824" />
     </state>
@@ -551,7 +556,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data_generator/binary_search_generator.py</url>
-          <line>207</line>
+          <line>211</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -560,9 +565,14 @@
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/plot_fuction/plot_binary_search.py</url>
-          <line>91</line>
-          <option name="timeStamp" value="90" />
+          <url>file://$PROJECT_DIR$/run.py</url>
+          <line>119</line>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data_generator/rnj_m2_generator.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="100" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -575,6 +585,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AlgPackage$run_RNJ.coverage" NAME="run_RNJ Coverage Results" MODIFIED="1615926628340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AlgPackage$pymcTest.coverage" NAME="pymcTest Coverage Results" MODIFIED="1609225149985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$gen_topo_dataset__1_.coverage" NAME="gen_topo_dataset (1) Coverage Results" MODIFIED="1611542969097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/topo_zoo" />
     <SUITE FILE_PATH="coverage/AlgPackage$MeasurementTest.coverage" NAME="MeasurementTest Coverage Results" MODIFIED="1609054535052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
@@ -587,14 +598,16 @@
     <SUITE FILE_PATH="coverage/AlgPackage$pymcTest2.coverage" NAME="pymcTest2 Coverage Results" MODIFIED="1610266286144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$Self_definedTest.coverage" NAME="Self-definedTest Coverage Results" MODIFIED="1610330082925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$pystanTest2.coverage" NAME="pystanTest2 Coverage Results" MODIFIED="1610888377594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/AlgPackage$plot_binary_search_NJ__1_.coverage" NAME="plot_binary_search_NJ (1) Coverage Results" MODIFIED="1615967980767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plot_fuction" />
     <SUITE FILE_PATH="coverage/AlgPackage$ILPTest.coverage" NAME="ILPTest Coverage Results" MODIFIED="1608003471427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$run_IdentifyTree.coverage" NAME="run_IdentifyTree Coverage Results" MODIFIED="1611626253123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AlgPackage$BIHMCAlg.coverage" NAME="BIHMCAlg Coverage Results" MODIFIED="1615361610253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
     <SUITE FILE_PATH="coverage/AlgPackage$gen_topo_dataset.coverage" NAME="gen_topo_dataset Coverage Results" MODIFIED="1615641484499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/topo_zoo" />
-    <SUITE FILE_PATH="coverage/AlgPackage$run.coverage" NAME="run Coverage Results" MODIFIED="1615275784959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AlgPackage$run.coverage" NAME="run Coverage Results" MODIFIED="1615731777667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AlgPackage$plot_topology_zoo.coverage" NAME="plot_topology_zoo Coverage Results" MODIFIED="1615688990467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/topo_zoo" />
-    <SUITE FILE_PATH="coverage/AlgPackage$plot_binary_search.coverage" NAME="plot_binary_search Coverage Results" MODIFIED="1615712291278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plot_fuction" />
+    <SUITE FILE_PATH="coverage/AlgPackage$plot_binary_search.coverage" NAME="plot_binary_search Coverage Results" MODIFIED="1615722550540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plot_fuction" />
+    <SUITE FILE_PATH="coverage/AlgPackage$rnj_m2_generator.coverage" NAME="rnj_m2_generator Coverage Results" MODIFIED="1615923718874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_generator" />
     <SUITE FILE_PATH="coverage/AlgPackage$PulpTest.coverage" NAME="PulpTest Coverage Results" MODIFIED="1607926410258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/AlgPackage$run_BIHMCAlg.coverage" NAME="run_BIHMCAlg Coverage Results" MODIFIED="1615363557575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AlgPackage$run_BIHMCAlg.coverage" NAME="run_BIHMCAlg Coverage Results" MODIFIED="1615729635474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

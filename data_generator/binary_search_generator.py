@@ -12,6 +12,7 @@
 用于给二分算法生成数据用的文件
 """
 from data_generator.M3Generator import M3Generator
+from data.topo_zoo.init import topo_zoo_set
 from network import Network
 import logging
 import networkx as nx
@@ -19,6 +20,8 @@ import numpy as np
 from util.tool import EtoVTree
 from util.tool import VTreetoE
 import json
+data_path = "../data/binary_search/"
+
 class M2Measure:
     def __init__(self,network:Network,p_correct):
         self.topo = network
@@ -152,32 +155,33 @@ def gen_data_binary_search_p_correct():
     变化测量正确的概率
     :return:
     """
-    data_dict = {}
-    p_correct_set = [1.0,0.95,0.9,0.85,0.8]
+    p_correct_set = [1.0, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6]
     times = 100
     logger = logging.getLogger("data_generator")
-    overlay_node_set, E = ([0,1,2,3,4,5],[(0, 6), (7,1), (7,2), (8,3), (8,4), (8, 5), (6,7),(6,8)])
-    vtree = EtoVTree(E)
-    data_dict["probability"] = [str(p) for p in p_correct_set]
-    data_dict["tree_vector"] = vtree
-    data_dict["experiment_times"] = times
-    data_dict["num_leaf"] = len(overlay_node_set)-1
-    network = Network(overlay_node_set, E, logger=logger)
-    network.plot_tree()
-    data_dict["topo_3_data"] = {}
-    for p_correct in p_correct_set:
-        data_dict["topo_3_data"][str(p_correct)] = []
-        for i in range(times):
-            m3_generator = M3Measure(network,p_correct=p_correct)
-            measured_m3 = m3_generator.measure_m3_all()
-            print(measured_m3)
-            data_dict["topo_3_data"][str(p_correct)].append(measured_m3)
-    with open("../data/binary_search/p_correct_set.txt","w") as f:
-        json.dump(data_dict,f,indent=4)
+    for overlay_node_set,tree_vector in topo_zoo_set:
+        data_dict = {}
+        E = VTreetoE(tree_vector)
+        num_path = len(overlay_node_set)-1
+        data_dict["probability"] = [str(p) for p in p_correct_set]
+        data_dict["tree_vector"] = tree_vector
+        data_dict["experiment_times"] = times
+        data_dict["num_leaf"] = num_path
+        network = Network(overlay_node_set, E, logger=logger)
+        # network.plot_tree()
+        data_dict["topo_3_data"] = {}
+        for p_correct in p_correct_set:
+            data_dict["topo_3_data"][str(p_correct)] = []
+            for i in range(times):
+                m3_generator = M3Measure(network,p_correct=p_correct)
+                measured_m3 = m3_generator.measure_m3_all()
+                # print(measured_m3)
+                data_dict["topo_3_data"][str(p_correct)].append(measured_m3)
+        filename = data_path+"p_correct_set_"+str(num_path)+".txt"
+        with open(filename,"w") as f:
+            json.dump(data_dict,f,indent=4)
 
 def gen_data_binary_search_topo_zoo():
     logger = logging.getLogger("data_generator")
-    from data.topo_zoo.init import topo_zoo_set
     times = 100
     p_correct = 0.9
     for overlay_nodes,vector_tree in topo_zoo_set:
@@ -194,7 +198,7 @@ def gen_data_binary_search_topo_zoo():
         for i in range(times):
             m3_generator = M3Measure(network,p_correct=p_correct)
             measured_m3 = m3_generator.measure_m3_all()
-            print(measured_m3)
+            # print(measured_m3)
             data_dict["topo_3_data"][str(p_correct)].append(measured_m3)
         with open("../data/binary_search/"+str(vector_tree)+".json","w") as f:
             json.dump(data_dict,f,indent=4)
@@ -204,7 +208,7 @@ def gen_data_binary_search_topo_zoo():
 
 
 if __name__ == '__main__':
-    # gen_data_binary_search_p_correct()
+    gen_data_binary_search_p_correct()
     # gen_data_binary_search_topo_zoo()
     # gen1()
     pass

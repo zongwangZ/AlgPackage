@@ -80,17 +80,33 @@ functions {
         prob = theta[i];
       }
     }
-    
+    if(prob == 0)
+    {
+        prob = 0.000001;
+    }
+    else if(prob == 1)
+    {
+        prob = 0.999999;
+    }
+
     return (log(prob)); 
   }
     
   real measure_m3_lpmf (int y, real[] theta) { // m3 概率分布
     real prob = 0.0;
-    
     for (topo in 0:4) {
       if (y == topo) {
         prob = theta[topo+1];
       }
+    }
+
+    if(prob == 0)
+    {
+        prob = 0.000001;
+    }
+    else if(prob == 1)
+    {
+        prob = 0.999999;
     }
     
     return (log(prob)); 

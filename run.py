@@ -125,12 +125,12 @@ def doSim_BI():
     for (overlay_node_set, E) in list1:
         # overlay_node_set, E = get4(1)
         network = Network(overlay_node_set, E,logger=logger)
-        network.plot_tree()
-        m3_generator = M3Generator(network,num_time_slots=1,p_correct=(0.5,0.5),logger=logger)
+        # network.plot_tree()
+        m3_generator = M3Generator(network,num_time_slots=100,r_ns_true=1.0,p_correct=(0.9,0.5),logger=logger)  # 观察的数据全部为正确
         sim_data = m3_generator.getSimData()
         from algorithm.BIHMCAlg import BIHMC
         used = "pystan"
-        alg = BIHMC(sim_data,logger,way=used)
+        alg = BIHMC(sim_data,logger,debug=0,way=used)
         alg.inference()
         alg.get_outcome()
 

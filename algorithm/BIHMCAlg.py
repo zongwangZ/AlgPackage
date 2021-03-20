@@ -25,8 +25,9 @@ import matplotlib.pyplot as plt
 
 class BIHMC:
 
-    def __init__(self, sim_data: dict, logger, way="pystan"):
+    def __init__(self, sim_data: dict, logger, debug=0,way="pystan"):
         self.way = way
+        self.debug = debug
         self.now_time = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
         # 配置logger
         self.__init_logger(logger)
@@ -49,8 +50,8 @@ class BIHMC:
     def init_data_path(self):
         if self.way == "pystan":
             self.data_path_pystan = "data/pystan/"  # pystan 数据的根目录
-            self.model_path_stan = 'algorithm/m3.stan'  # stan 模型文件
-            # self.model_path_stan = 'algorithm/new_m3.stan'  # new stan 模型文件
+            # self.model_path_stan = 'algorithm/m3.stan'  # stan 模型文件
+            self.model_path_stan = 'algorithm/new_m3.stan'  # new stan 模型文件
             self.cmodel_path_stan = self.data_path_pystan + "model" + ".pkl"  # 编译后的模型文件
             self.fit_path_stan = self.data_path_pystan + "fit" + \
                                  self.now_time + ".pkl"  # fit路径
@@ -68,7 +69,7 @@ class BIHMC:
             else:
                 sm = self.gen_model_with_pystan()
                 self.save_mode_pystan(sm, self.cmodel_path_stan)
-            # 模型数据
+            # 产生模型数据
             model_data = self.gen_model_data_pystan()
 
             # 进行采样
@@ -88,8 +89,8 @@ class BIHMC:
             fit = self.load_fit_pystan(self.fit_path_stan)
             la = fit.extract(permuted=True)
             m2_samples = la["m2"]
-            plt.acorr(m2_samples[:,0])
-            plt.show()
+            # plt.acorr(m2_samples[:,0]) #画什么东西来着
+            # plt.show()
             assert isinstance(m2_samples,np.ndarray)
             # self.__logger.info("m2_samples:"+str(m2_samples))
             inferred_m2_real = np.mean(m2_samples,axis=0)
@@ -104,15 +105,15 @@ class BIHMC:
 
     def gen_model_data_pystan(self):
         model_data = dict(
-            do_debug=0,  # 0为不打印，1为打印结果
+            do_debug=self.debug,  # 0为不打印，1为打印结果
             T=self.T,
             N=self.N,
             m3_observed=self.m3_observed,
             prc=self.prc,
             index_m2=self.ind_m2,
             index_m3=self.ind_m3,
-            # net_status = np.random.uniform(0,1,self.T), #对应new_m3.stan，减小难度
-            # r_ns = 1.0  # 对应new_m3.stan 减小难度
+            net_status = np.random.uniform(0,1,self.T), #对应new_m3.stan，减小难度
+            r_ns = self.r_ns_true  # 对应new_m3.stan 减小难度
         )
         # self.__logger.info("model data is "+str(model_data))
         # 保存模型数据
@@ -127,23 +128,36 @@ class BIHMC:
         r_ns_true = self.r_ns_true
         N = self.N
 
-        def model_init():
-            return dict(m2=true_m2 + np.random.uniform(low=0.0, high=0.5, size=true_m2.size),
-                        net_status=np.random.uniform(low=0,high=1,size=self.T),
-                        r_n2 = self.r_ns_true)  # 暂时不进行初始化
+        # def model_init():
+        #     return dict(m2=true_m2 + np.random.uniform(low=0.0, high=0.5, size=true_m2.size),
+        #                 net_status=np.random.uniform(low=0,high=1,size=self.T),
+        #                 r_n2 = self.r_ns_true)  # 暂时不进行初始化
 
         # def model_init():
-        #     return dict(m2=true_m2 + np.random.uniform(0,1.0,len(true_m2)),
+        #     return dict(m2=true_m2 + np.random.uniform(0,0.5,len(true_m2)),
         #                 )  # 暂时不进行初始化
+
+        def model_init():
+            init_m2 = []
+            for item in true_m2:
+                if item == N-1:
+                    init_m2.append(item + np.random.uniform(-1,0.5))
+                elif item == 1:
+                    init_m2.append(item + np.random.uniform(-0.5,1))
+                else:
+                    init_m2.append(item + np.random.uniform(-1,1))
+            return dict(m2=init_m2,
+                        )
 
         fit = sm.sampling(data=model_data,
                           chains=4,
                           # warmup=1000,
                           init=model_init,
-                          iter=1000,
+                          iter=2000,
                           seed=20200829,
                           # algorithm="HMC",
                           control=dict(max_treedepth=12, adapt_delta=0.90),
+                          # control=dict(max_treedepth=15, adapt_delta=0.99),
                           # control=dict(adapt_delta=0.90)
                           )
         self.save_samples_tocsv(fit)

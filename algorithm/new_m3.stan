@@ -74,25 +74,39 @@ functions {
   
   real measure_m2_lpmf (int y, real[] theta, int num_u) { // m2 概率分布
     real prob = 0.0;
-    
+    real offset = 0.000001;
     for (i in 1:num_u) {
       if (y == i) {
-        prob = theta[i];
+        prob = theta[i]+offset;
       }
     }
-    
+    if(prob == 0)
+    {
+        prob = 0.000001;
+    }
+    else if(prob == 1)
+    {
+        prob = 0.999999;
+    }
     return (log(prob)); 
   }
     
   real measure_m3_lpmf (int y, real[] theta) { // m3 概率分布
     real prob = 0.0;
-    
+    real offset = 0.000001;
     for (topo in 0:4) {
       if (y == topo) {
-        prob = theta[topo+1];
+        prob = theta[topo+1]+offset;
       }
     }
-    
+    if(prob == 0)
+    {
+        prob = 0.000001;
+    }
+    else if(prob == 1)
+    {
+        prob = 0.999999;
+    }
     return (log(prob)); 
   }
 }

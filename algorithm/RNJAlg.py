@@ -21,7 +21,7 @@ class RNJAlg:
         self.topo = network
         self.init_logger(logger)
 
-    def inference(self,similarity_metrics,threshold):
+    def inference(self,similarity_metrics,threshold=0.5):
         S = similarity_metrics
         e = threshold
         R = self.topo.getDestinations()
@@ -72,12 +72,10 @@ class RNJAlg:
             dotR.append(number)
             number = number + 1
         E.append((0, dotR[0]))
-        inferredE = numberTopo(E, R)
+        inferredE = numberTopo(E, self.topo.getDestinations())
         inferred_vtree = EtoVTree(inferredE)
         inferredE = VTreetoE(inferred_vtree)
-        data['inferredE'] = inferredE
-
-        return E
+        return inferredE
 
     def init_logger(self,logger=None):
         if not logger:
