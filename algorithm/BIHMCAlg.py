@@ -22,13 +22,14 @@ import logging
 import time
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import os
 class BIHMC:
 
-    def __init__(self, sim_data: dict, logger, debug=0,way="pystan"):
+    def __init__(self, sim_data: dict, logger, debug=0,iteration_steps=2000,way="pystan"):
         self.way = way
         self.debug = debug
-        self.now_time = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+        self.iteration_steps = iteration_steps
+        self.now_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())
         # 配置logger
         self.__init_logger(logger)
         # if way == "pystan":
@@ -50,18 +51,17 @@ class BIHMC:
     def init_data_path(self):
         if self.way == "pystan":
             self.data_path_pystan = "data/pystan/"  # pystan 数据的根目录
+            os.mkdir(self.data_path_pystan+self.now_time)
+            self.data_path_pystan_now = self.data_path_pystan+self.now_time+"/"
             # self.model_path_stan = 'algorithm/m3.stan'  # stan 模型文件
             self.model_path_stan = 'algorithm/new_m3.stan'  # new stan 模型文件
-            self.cmodel_path_stan = self.data_path_pystan + "model" + ".pkl"  # 编译后的模型文件
-            self.fit_path_stan = self.data_path_pystan + "fit" + \
-                                 self.now_time + ".pkl"  # fit路径
-            self.fit_samples_path_stan = self.data_path_pystan + "fit_samples" + \
-                                self.now_time + ".csv"  # fit samples的路径
-            self.model_data_path_stan = self.data_path_pystan + "model_data" + \
-                                        self.now_time + ".txt"  # 模型数据的路径
+            self.cmodel_path_stan = self.data_path_pystan + "model.pkl"  # 编译后的模型文件
+            self.fit_path_stan = self.data_path_pystan_now + "fit.pkl"  # fit路径
+            self.fit_samples_path_stan = self.data_path_pystan_now + "fit_samples.csv"  # fit samples的路径
+            self.model_data_path_stan = self.data_path_pystan_now + "model_data.txt"  # 模型数据的路径
 
     def inference(self):
-        self.__logger.info("-"*10 + f"using {self.way} build the model" + "_"*10)
+        self.__logger.info("-"*10 + f"using {self.way} build the model" + "-"*10)
         if self.way == "pystan":
             # 加载 stan 模型
             if file_exists(self.cmodel_path_stan):
@@ -118,7 +118,7 @@ class BIHMC:
         # self.__logger.info("model data is "+str(model_data))
         # 保存模型数据
         pystan.misc.stan_rdump(model_data, self.model_data_path_stan)
-        self.__logger.info("保存模型数据到:"+self.model_data_path_stan)
+        self.__logger.debug("保存模型数据到:"+self.model_data_path_stan)
         return model_data
 
     def sampling_pystan(self,model_data, sm):
@@ -133,30 +133,31 @@ class BIHMC:
         #                 net_status=np.random.uniform(low=0,high=1,size=self.T),
         #                 r_n2 = self.r_ns_true)  # 暂时不进行初始化
 
-        # def model_init():
-        #     return dict(m2=true_m2 + np.random.uniform(0,0.5,len(true_m2)),
-        #                 )  # 暂时不进行初始化
-
         def model_init():
-            init_m2 = []
-            for item in true_m2:
-                if item == N-1:
-                    init_m2.append(item + np.random.uniform(-1,0.5))
-                elif item == 1:
-                    init_m2.append(item + np.random.uniform(-0.5,1))
-                else:
-                    init_m2.append(item + np.random.uniform(-1,1))
-            return dict(m2=init_m2,
-                        )
+            return dict(m2=true_m2 + np.random.uniform(-0.5,0.5,len(true_m2)),
+                        )  # 暂时不进行初始化
+
+        # def model_init():
+        #     init_m2 = []
+        #     for item in true_m2:
+        #         if item == N-1:
+        #             init_m2.append(item + np.random.uniform(-1,0.5))
+        #         elif item == 1:
+        #             init_m2.append(item + np.random.uniform(-0.5,1))
+        #         else:
+        #             init_m2.append(item + np.random.uniform(-1,1))
+        #     return dict(m2=init_m2,
+        #                 )
 
         fit = sm.sampling(data=model_data,
-                          chains=4,
+                          chains=1,
                           # warmup=1000,
                           init=model_init,
-                          iter=2000,
+                          iter=self.iteration_steps,
                           seed=20200829,
                           # algorithm="HMC",
-                          control=dict(max_treedepth=12, adapt_delta=0.90),
+                          # control=dict(max_treedepth=12, adapt_delta=0.90),
+                          control=dict(max_treedepth=12, adapt_delta=1.0),
                           # control=dict(max_treedepth=15, adapt_delta=0.99),
                           # control=dict(adapt_delta=0.90)
                           )
@@ -164,7 +165,7 @@ class BIHMC:
         return fit
 
     def save_samples_tocsv(self,fit):
-        self.__logger.info("保存samples到:"+self.fit_samples_path_stan)
+        self.__logger.debug("保存samples到:"+self.fit_samples_path_stan)
         df = pystan.misc.to_dataframe(fit)
         df.to_csv(self.fit_samples_path_stan, index=False)
 
@@ -198,13 +199,13 @@ class BIHMC:
     def load_model_pystan(self, cmodel_path):
         sm = pickle.load(open(cmodel_path, 'rb'))
         assert isinstance(sm,pystan.StanModel)
-        self.__logger.info("pystan model 加载成功  " + sm.model_name)
+        self.__logger.debug("pystan model 加载成功  " + sm.model_name)
         return sm
 
     def save_mode_pystan(self, sm, cmodel_path_stan):
         with open(cmodel_path_stan, 'wb') as f:
             pickle.dump(sm, f, protocol=pickle.HIGHEST_PROTOCOL)
-        self.__logger.info("保存stan model 到"+cmodel_path_stan)
+        self.__logger.debug("保存stan model 到"+cmodel_path_stan)
 
     def __init_logger(self, logger):
         """

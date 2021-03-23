@@ -15,22 +15,21 @@ import time
 class Logger:
     def __init__(self,logger_name,log_name,log_level=logging.INFO):
         self.logger = logging.getLogger(logger_name)
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(log_level)
         fmt = logging.Formatter('[%(asctime)s] [%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
         #  输出到文件
         date = time.asctime()
-        now_time = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+        now_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())
         log_name += now_time
-        fh = logging.FileHandler('log/'+log_name+".log")
-        fh.setLevel(log_level)
+        fh = logging.FileHandler('log/'+log_name+".log",encoding="utf-8")
         fh.setFormatter(fmt)
         self.logger.addHandler(fh)
 
         # 输出到Console
-        sh = logging.StreamHandler()
-        sh.setFormatter(fmt)
-        sh.setLevel(log_level)
-        self.logger.addHandler(sh)
+        # sh = logging.StreamHandler()
+        # sh.setFormatter(fmt)
+        # sh.setLevel(log_level)
+        # self.logger.addHandler(sh)
 
 
     def debug(self, message):
@@ -40,7 +39,7 @@ class Logger:
         self.logger.info(message)
 
     def war(self, message):
-        self.logger.warn(message)
+        self.logger.warning(message)
 
     def error(self, message):
         self.logger.error(message)
