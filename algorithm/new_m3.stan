@@ -74,39 +74,37 @@ functions {
   
   real measure_m2_lpmf (int y, real[] theta, int num_u) { // m2 概率分布
     real prob = 0.0;
-    real offset = 0.000001;
     for (i in 1:num_u) {
       if (y == i) {
-        prob = theta[i]+offset;
+        prob = theta[i];
       }
     }
-    if(prob == 0)
-    {
-        prob = 0.000001;
-    }
-    else if(prob == 1)
-    {
-        prob = 0.999999;
-    }
-    return (log(prob)); 
+//    if(prob == 0)
+//    {
+//        prob = 0.000001;
+//    }
+//    else if(prob == 1)
+//    {
+//        prob = 0.999999;
+//    }
+    return (log(prob));
   }
     
   real measure_m3_lpmf (int y, real[] theta) { // m3 概率分布
     real prob = 0.0;
-    real offset = 0.000001;
     for (topo in 0:4) {
       if (y == topo) {
-        prob = theta[topo+1]+offset;
+        prob = theta[topo+1];
       }
     }
-    if(prob == 0)
-    {
-        prob = 0.000001;
-    }
-    else if(prob == 1)
-    {
-        prob = 0.999999;
-    }
+//    if(prob == 0)
+//    {
+//        prob = 0.000001;
+//    }
+//    else if(prob == 1)
+//    {
+//        prob = 0.999999;
+//    }
     return (log(prob)); 
   }
 }
@@ -133,7 +131,7 @@ data {
 // 网络状态正常的概率r
 parameters {
   vector<lower=0.5, upper=(N-0.5)>[N*(N-1)/2] m2;
-  
+
   // real<lower=0, upper=1> net_status[T]; //注释掉减少推断难度
   // real<lower=0, upper=1> r_ns;           //注释掉减少推断难度
 }

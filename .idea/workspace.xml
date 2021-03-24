@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7aad753a-0b7a-41b0-b837-b709dda3a39a" name="Default Changelist" comment="完成数据保存部分">
-      <change afterPath="$PROJECT_DIR$/doc/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plot_fuction/plot_BI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/名词解释.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algorithm/BIHMCAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/BIHMCAlg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm/new_m3.stan" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm/new_m3.stan" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log_config/Logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/log_config/Logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plot_fuction/plot_BI.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot_fuction/plot_BI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_BIHMCAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_BIHMCAlg.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +102,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="binary_search_generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="plot_BI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AlgPackage" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -108,12 +110,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_generator" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/plot_fuction" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_generator/binary_search_generator.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plot_fuction/plot_BI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -170,6 +172,9 @@
       <module name="AlgPackage" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -211,16 +216,16 @@
       <item itemvalue="Python.rnj_m2_generator" />
       <item itemvalue="Python.run_RNJ" />
       <item itemvalue="Python.plot_binary_search_NJ (1)" />
-      <item itemvalue="Python.binary_search_generator" />
       <item itemvalue="Python.run_BIHMCAlg" />
+      <item itemvalue="Python.plot_BI" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.run_BIHMCAlg" />
+        <item itemvalue="Python.plot_BI" />
         <item itemvalue="Python.plot_binary_search_NJ (1)" />
         <item itemvalue="Python.run_RNJ" />
         <item itemvalue="Python.rnj_m2_generator" />
-        <item itemvalue="Python.binary_search_generator" />
       </list>
     </recent_temporary>
   </component>
@@ -287,7 +292,10 @@
       <workItem from="1616135166189" duration="1606000" />
       <workItem from="1616142060935" duration="1980000" />
       <workItem from="1616169919671" duration="9620000" />
-      <workItem from="1616330624066" duration="20081000" />
+      <workItem from="1616330624066" duration="29703000" />
+      <workItem from="1616504702850" duration="7356000" />
+      <workItem from="1616612948960" duration="772000" />
+      <workItem from="1616614476151" duration="54000" />
     </task>
     <task id="LOCAL-00001" summary="日志中保存重要结果">
       <created>1608900546211</created>
@@ -391,22 +399,21 @@
     <state x="293" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609314661702">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="293" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1607932336253" />
     <state x="293" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1609314661702" />
-    <state x="450" y="221" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1615364934681">
+    <state x="450" y="221" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616509788945">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1470" y="221" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608089923602" />
-    <state x="450" y="221" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615364934680" />
+    <state x="450" y="221" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616509788945" />
     <state x="450" y="221" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1610596250930" />
     <state x="-1510" y="185" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1608102176609">
       <screen x="-1920" y="0" width="1536" height="824" />
     </state>
     <state x="-1510" y="185" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608102176609" />
-    <state x="278" y="287" width="488" height="506" key="#xdebugger.evaluate" timestamp="1615712416012">
+    <state x="354" y="287" width="488" height="506" key="#xdebugger.evaluate" timestamp="1616500870319">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="278" y="287" width="708" height="537" key="#xdebugger.evaluate/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615712416012" />
+    <state x="354" y="287" width="708" height="537" key="#xdebugger.evaluate/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616500870319" />
     <state x="250" y="175" width="488" height="506" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1612080219376" />
     <state x="367" y="20" key="CommitChangelistDialog2" timestamp="1615191138231">
       <screen x="0" y="0" width="1536" height="824" />
@@ -428,59 +435,59 @@
     </state>
     <state x="-1302" y="186" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1614411207666" />
     <state x="618" y="186" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615513837899" />
-    <state width="1493" height="261" key="GridCell.Tab.0.bottom" timestamp="1616467560628">
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom" timestamp="1616504499189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="174" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609158968559" />
-    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616467560628" />
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616504499189" />
     <state width="723" height="263" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
-    <state width="1493" height="261" key="GridCell.Tab.0.center" timestamp="1616467560628">
+    <state width="1493" height="261" key="GridCell.Tab.0.center" timestamp="1616504499189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="174" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609158968559" />
-    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616467560628" />
+    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616504499189" />
     <state width="723" height="263" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
-    <state width="1493" height="261" key="GridCell.Tab.0.left" timestamp="1616467560627">
+    <state width="1493" height="261" key="GridCell.Tab.0.left" timestamp="1616504499188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="174" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609158968559" />
-    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616467560627" />
+    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616504499188" />
     <state width="723" height="263" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1615974913018" />
-    <state width="1493" height="261" key="GridCell.Tab.0.right" timestamp="1616467560628">
+    <state width="1493" height="261" key="GridCell.Tab.0.right" timestamp="1616504499189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="174" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609158968559" />
-    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616467560628" />
+    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616504499189" />
     <state width="723" height="263" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1616467560628">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1616504499189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616467560628" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616504499189" />
     <state width="723" height="263" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1615974913020" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1616467560628">
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1616504499189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616467560628" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616504499189" />
     <state width="723" height="263" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1616467560628">
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1616504499189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616467560628" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616504499189" />
     <state width="723" height="263" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1615974913019" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1616467560628">
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1616504499189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="746" height="258" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1608213547247" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616467560628" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616504499189" />
     <state width="723" height="263" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1615974913020" />
-    <state x="203" y="64" key="SettingsEditor" timestamp="1616482410199">
+    <state x="203" y="64" key="SettingsEditor" timestamp="1616506654185">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1653" y="56" key="SettingsEditor/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1614411485718" />
-    <state x="203" y="64" key="SettingsEditor/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616482410199" />
+    <state x="203" y="64" key="SettingsEditor/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616506654185" />
     <state x="272" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1610269293433" />
     <state x="361" y="149" key="Vcs.Push.Dialog.v2" timestamp="1610881724380">
       <screen x="0" y="0" width="1536" height="824" />
@@ -495,11 +502,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1615511517342" />
-    <state x="461" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1616142069941">
+    <state x="461" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1616614506307">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1459" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1614411202274" />
-    <state x="461" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616142069941" />
+    <state x="461" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616614506307" />
     <state x="461" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1614319972632" />
     <state x="465" y="215" key="git4idea.merge.GitPullDialog" timestamp="1609941119424">
       <screen x="0" y="0" width="1536" height="824" />
@@ -509,10 +516,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="74" key="scopes/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616128669523" />
-    <state x="-1340" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1609900939597">
-      <screen x="-1920" y="0" width="1536" height="824" />
+    <state x="580" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1616487453312">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1340" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1609900939597" />
+    <state x="580" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1616487453312" />
     <state x="580" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1608887017583" />
   </component>
   <component name="XDebuggerManager">
@@ -569,9 +577,9 @@
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/run_BIHMCAlg.py</url>
-          <line>112</line>
-          <option name="timeStamp" value="101" />
+          <url>file://$PROJECT_DIR$/plot_fuction/plot_BI.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="104" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -586,17 +594,17 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AlgPackage$run_RNJ.coverage" NAME="run_RNJ Coverage Results" MODIFIED="1615926628340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AlgPackage$pymcTest.coverage" NAME="pymcTest Coverage Results" MODIFIED="1609225149985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/AlgPackage$OCCAMAlg.coverage" NAME="OCCAMAlg Coverage Results" MODIFIED="1606898620176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
+    <SUITE FILE_PATH="coverage/AlgPackage$binary_search_generator.coverage" NAME="binary_search_generator Coverage Results" MODIFIED="1615685976084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_generator" />
+    <SUITE FILE_PATH="coverage/AlgPackage$Self_definedTest.coverage" NAME="Self-definedTest Coverage Results" MODIFIED="1610330082925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/AlgPackage$pystanTest2.coverage" NAME="pystanTest2 Coverage Results" MODIFIED="1610888377594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$gen_topo_dataset__1_.coverage" NAME="gen_topo_dataset (1) Coverage Results" MODIFIED="1611542969097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/topo_zoo" />
     <SUITE FILE_PATH="coverage/AlgPackage$MeasurementTest.coverage" NAME="MeasurementTest Coverage Results" MODIFIED="1609054535052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$gen_topo_zoo.coverage" NAME="gen_topo_dataset Coverage Results" MODIFIED="1611453799787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/topo_zoo" />
-    <SUITE FILE_PATH="coverage/AlgPackage$OCCAMAlg.coverage" NAME="OCCAMAlg Coverage Results" MODIFIED="1606898620176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
     <SUITE FILE_PATH="coverage/AlgPackage$network.coverage" NAME="network Coverage Results" MODIFIED="1605265158354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/AlgPackage$binary_search_generator.coverage" NAME="binary_search_generator Coverage Results" MODIFIED="1615685976084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_generator" />
     <SUITE FILE_PATH="coverage/AlgPackage$pymcTest3.coverage" NAME="pymcTest3 Coverage Results" MODIFIED="1610268830285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$ILPAlg.coverage" NAME="ILPAlg Coverage Results" MODIFIED="1606388689058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
     <SUITE FILE_PATH="coverage/AlgPackage$pymcTest2.coverage" NAME="pymcTest2 Coverage Results" MODIFIED="1610266286144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/AlgPackage$Self_definedTest.coverage" NAME="Self-definedTest Coverage Results" MODIFIED="1610330082925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/AlgPackage$pystanTest2.coverage" NAME="pystanTest2 Coverage Results" MODIFIED="1610888377594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$plot_binary_search_NJ__1_.coverage" NAME="plot_binary_search_NJ (1) Coverage Results" MODIFIED="1615967980767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plot_fuction" />
     <SUITE FILE_PATH="coverage/AlgPackage$ILPTest.coverage" NAME="ILPTest Coverage Results" MODIFIED="1608003471427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/AlgPackage$run_IdentifyTree.coverage" NAME="run_IdentifyTree Coverage Results" MODIFIED="1611626253123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -606,7 +614,8 @@
     <SUITE FILE_PATH="coverage/AlgPackage$plot_topology_zoo.coverage" NAME="plot_topology_zoo Coverage Results" MODIFIED="1615688990467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/topo_zoo" />
     <SUITE FILE_PATH="coverage/AlgPackage$plot_binary_search.coverage" NAME="plot_binary_search Coverage Results" MODIFIED="1615722550540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plot_fuction" />
     <SUITE FILE_PATH="coverage/AlgPackage$rnj_m2_generator.coverage" NAME="rnj_m2_generator Coverage Results" MODIFIED="1615923718874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_generator" />
+    <SUITE FILE_PATH="coverage/AlgPackage$plot_BI.coverage" NAME="plot_BI Coverage Results" MODIFIED="1616500835324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plot_fuction" />
     <SUITE FILE_PATH="coverage/AlgPackage$PulpTest.coverage" NAME="PulpTest Coverage Results" MODIFIED="1607926410258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/AlgPackage$run_BIHMCAlg.coverage" NAME="run_BIHMCAlg Coverage Results" MODIFIED="1616467141664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AlgPackage$run_BIHMCAlg.coverage" NAME="run_BIHMCAlg Coverage Results" MODIFIED="1616487502157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

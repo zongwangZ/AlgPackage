@@ -22,6 +22,7 @@ from algorithm.BIHMCAlg import BIHMC
 import os
 from util.tool import VTreetoE
 from log_config.Logger import Logger
+from data.topo_zoo.init import topo_zoo_set
 used = "pystan"
 def verify_algorithm():
     """
@@ -29,19 +30,20 @@ def verify_algorithm():
     :return:
     """
     # 关键参数
-    p = 1.0
-    num_time_slot = 1
-    iteration_steps = 10000
+    p = 0.9
+    num_time_slot = 400
+    iteration_steps = 5000
     debug = 0
 
-    logger = Logger("log_BI","verify_algorithm")
-    overlay_node_set, E = ([0, 1, 2, 3, 4], [(6, 1), (6, 2), (7, 3), (7, 4), (0, 5), (5, 6), (5, 7)])
+    logger = Logger("log_BI","verify_algorithm",if_file=True,if_console=False)
+    # overlay_node_set, E = ([0, 1, 2, 3, 4], [(6, 1), (6, 2), (7, 3), (7, 4), (0, 5), (5, 6), (5, 7)])
+    overlay_node_set, E = ([0,1,2,3,4,5],[(0, 6), (1, 7), (2, 7), (3, 8), (4, 8), (5, 8), (6, 7), (6, 8)])
     network = Network(overlay_node_set, E, logger=logger)
     m3_generator = M3Generator(network, num_time_slots=num_time_slot, p_correct=(p, 0.5), logger=logger)
     sim_data = m3_generator.getSimData()
     alg = BIHMC(sim_data, logger, debug=debug,iteration_steps=iteration_steps,way=used)
     alg.inference()
-    inferred_m2, true_m2 = alg.get_outcome()
+    inferred_m2, true_m2 = alg.get_outcome(ifplot=True)
     print(inferred_m2)
     print([round(i) for i in inferred_m2])
     print(true_m2)
@@ -56,8 +58,7 @@ def do_sim_p_correct():
     systime = time.strftime("%Y-%m-%d %H-%M-%S",time.localtime())
     filepath = "data/pystan/outcome/rst_p_correct"+systime+".txt"
     with open(filepath,"a+") as file:
-        logging.config.fileConfig('log_config/logging_BI.conf')
-        logger = logging.getLogger('applogBI')
+        logger = Logger("log_BI", "p_correct")
         logger.info("-"*10 + "start at " + systime + "-"*10)
         # overlay_node_set,E = ([0,1,2,3,4],[(6,1),(6,2),(7,3),(7,4),(0,5),(5,6),(5,7)])
         overlay_node_set, E = ([0,1,2,3,4,5],[(0, 6), (1, 7), (2, 7), (3, 8), (4, 8), (5, 8), (6, 7), (6, 8)])
@@ -72,7 +73,7 @@ def do_sim_p_correct():
                 # network.plot_tree()
                 m3_generator = M3Generator(network, num_time_slots=1, p_correct=(p_correct, 0.5), logger=logger)
                 sim_data = m3_generator.getSimData()
-                alg = BIHMC(sim_data, logger, way=used)
+                alg = BIHMC(sim_data, iteration_steps=100,logger=logger, way=used)
                 alg.inference()
                 inferred_m2, true_m2 = alg.get_outcome()
                 file.write(str(i)+" "+ str(p_correct)+" "+str(inferred_m2) + " " + str(true_m2)+"\n")
@@ -80,31 +81,34 @@ def do_sim_p_correct():
 
 
 def do_sim_topo_var():
-    from data.topo_zoo.init import topo_zoo_set
+    # 关键参数
+    times = 1
+    p_correct = 0.9
+    r_ns_true = 1
+    num_time_slots = 1
+    iteration_steps = 100
+    used = "pystan"
     systime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
     filepath = "data/pystan/outcome/rst_topo_var" + systime + ".txt"
+    logger = Logger("log_BI", "p_correct")
+    logger.info("p_correct: " + str(p_correct)+" 重复实验次数: "
+                +str(times)+" 网络良好概率: "+str(r_ns_true)+" 测量次数: "+str(num_time_slots)
+                +" 马尔科夫链迭代次数: "+str(iteration_steps))
     with open(filepath, "a+") as file:
-        logging.config.fileConfig('log_config/logging_BI.conf')
-        logger = logging.getLogger('applogBI')
-        logger.info("-" * 10 + "start at " + systime + "-" * 10)
-        times = 1
-        p_correct = 0.9
         for overlay_node_set, vecotr_tree in topo_zoo_set:
             E = VTreetoE(vecotr_tree)
-            # if len(overlay_node_set)-1 < 6:
-            #     continue
             for i in range(times):
                 logger.info(f"第{str(i)}次实验")
-                logger.info("p_correct:" + str(p_correct))
                 network = Network(overlay_node_set, E, logger=logger)
                 # network.plot_tree()
-                m3_generator = M3Generator(network, num_time_slots=1,r_ns_true=1, p_correct=(p_correct, 0.5), logger=logger)
+                m3_generator = M3Generator(network, num_time_slots=num_time_slots,
+                                           r_ns_true=r_ns_true, p_correct=(p_correct, 0.5), logger=logger)
                 sim_data = m3_generator.getSimData()
-                used = "pystan"
-                alg = BIHMC(sim_data, logger, way=used)
+                alg = BIHMC(sim_data, iteration_steps=iteration_steps,logger=logger, way=used)
                 alg.inference()
                 inferred_m2, true_m2 = alg.get_outcome()
-                file.write(str(i) + " " + str(vecotr_tree) + " " + str(inferred_m2) + " " + str(true_m2) + "\n")
+                inferred_m2 = list(inferred_m2)
+                file.write(str(i) + "|" + str(vecotr_tree) + "|" + str(inferred_m2) + "|" + str(true_m2) + "\n")
 
 
 if __name__ == '__main__':

@@ -12,6 +12,7 @@
 贝叶斯后验估计+汉密尔顿蒙特卡洛采样
 """
 # import pymc3 as pm
+import arviz as az
 import numpy as np
 import math
 import pystan
@@ -22,6 +23,7 @@ import logging
 import time
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib
 import os
 class BIHMC:
 
@@ -76,15 +78,15 @@ class BIHMC:
             fit = self.sampling_pystan(model_data,sm)
             self.save_fit_pystan(sm, fit, self.fit_path_stan)
 
-    def get_outcome(self, way="pystan"):
+    def get_outcome(self, way="pystan",ifplot=False):
         if way == "pystan":
-            return self.get_outcome_pystan()
+            return self.get_outcome_pystan(ifplot)
 
 
 
 
 
-    def get_outcome_pystan(self):
+    def get_outcome_pystan(self,ifplot=False):
         if file_exists(self.fit_path_stan):
             fit = self.load_fit_pystan(self.fit_path_stan)
             la = fit.extract(permuted=True)
@@ -96,6 +98,11 @@ class BIHMC:
             inferred_m2_real = np.mean(m2_samples,axis=0)
             self.__logger.info("inferred_m2_real:"+str(inferred_m2_real))
             self.__logger.info("self.true_m2:"+str(self.true_m2))
+
+            if ifplot:
+                fit.plot()
+                plt.show()
+                az.plot_trace(fit)
             return inferred_m2_real,self.true_m2
 
 
@@ -133,31 +140,31 @@ class BIHMC:
         #                 net_status=np.random.uniform(low=0,high=1,size=self.T),
         #                 r_n2 = self.r_ns_true)  # 暂时不进行初始化
 
-        def model_init():
-            return dict(m2=true_m2 + np.random.uniform(-0.5,0.5,len(true_m2)),
-                        )  # 暂时不进行初始化
-
         # def model_init():
-        #     init_m2 = []
-        #     for item in true_m2:
-        #         if item == N-1:
-        #             init_m2.append(item + np.random.uniform(-1,0.5))
-        #         elif item == 1:
-        #             init_m2.append(item + np.random.uniform(-0.5,1))
-        #         else:
-        #             init_m2.append(item + np.random.uniform(-1,1))
-        #     return dict(m2=init_m2,
-        #                 )
+        #     return dict(m2=true_m2 + np.random.uniform(-0.5,0.5,len(true_m2)),
+        #                 )  # 暂时不进行初始化
+
+        def model_init():
+            init_m2 = []
+            for item in true_m2:
+                if item == N-1:
+                    init_m2.append(item + np.random.uniform(-1,0.5))
+                elif item == 1:
+                    init_m2.append(item + np.random.uniform(-0.5,1))
+                else:
+                    init_m2.append(item + np.random.uniform(-1,1))
+            return dict(m2=init_m2,
+                        )
 
         fit = sm.sampling(data=model_data,
-                          chains=1,
+                          chains=4,
                           # warmup=1000,
                           init=model_init,
                           iter=self.iteration_steps,
                           seed=20200829,
                           # algorithm="HMC",
                           # control=dict(max_treedepth=12, adapt_delta=0.90),
-                          control=dict(max_treedepth=12, adapt_delta=1.0),
+                          control=dict(max_treedepth=12, adapt_delta=0.9),
                           # control=dict(max_treedepth=15, adapt_delta=0.99),
                           # control=dict(adapt_delta=0.90)
                           )
