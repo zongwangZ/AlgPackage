@@ -24,13 +24,14 @@ def plot_1():
             _, line = line.split("[",1)
             _, line = line.split("[",1)
             inferred_m2_str,true_m2_str = line.split("[",1)
-
-
-
-
             line = file.readline()
 
+def plot_converge():
+    """
 
+    :return:
+    """
+    pass
 
 
 if __name__ == '__main__':

@@ -35,9 +35,9 @@ def verify_algorithm():
     iteration_steps = 5000
     debug = 0
 
-    logger = Logger("log_BI","verify_algorithm",if_file=True,if_console=False)
-    # overlay_node_set, E = ([0, 1, 2, 3, 4], [(6, 1), (6, 2), (7, 3), (7, 4), (0, 5), (5, 6), (5, 7)])
-    overlay_node_set, E = ([0,1,2,3,4,5],[(0, 6), (1, 7), (2, 7), (3, 8), (4, 8), (5, 8), (6, 7), (6, 8)])
+    logger = Logger("log_BI","verify_algorithm",if_file=False,if_console=False)
+    overlay_node_set, E = ([0, 1, 2, 3, 4], [(6, 1), (6, 2), (7, 3), (7, 4), (0, 5), (5, 6), (5, 7)])
+    # overlay_node_set, E = ([0,1,2,3,4,5],[(0, 6), (1, 7), (2, 7), (3, 8), (4, 8), (5, 8), (6, 7), (6, 8)])
     network = Network(overlay_node_set, E, logger=logger)
     m3_generator = M3Generator(network, num_time_slots=num_time_slot, p_correct=(p, 0.5), logger=logger)
     sim_data = m3_generator.getSimData()
@@ -47,7 +47,6 @@ def verify_algorithm():
     print(inferred_m2)
     print([round(i) for i in inferred_m2])
     print(true_m2)
-
 
 
 def do_sim_p_correct():
@@ -114,5 +113,5 @@ def do_sim_topo_var():
 if __name__ == '__main__':
     # do_sim_topo_var()
     # do_sim_p_correct()
-    verify_algorithm()
+    # verify_algorithm()
     pass
